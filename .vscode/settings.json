@@ -1,0 +1,22 @@
+{
+  "editor.rulers": [100],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  "files.defaultLanguage": "javascriptreact",
+  "files.eol": "\n",
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "dist": true
+  },
+
+  "search.exclude": {
+    "**/.git": true,
+    "node_modules": true,
+    "dist": true
+  }
+}

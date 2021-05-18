@@ -1,0 +1,20 @@
+name: 'Lint'
+on: pull_request
+jobs:
+  build:
+    name: Lint code
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@master
+      with:
+        node-version: 14.x
+
+    - name: Run checks
+      run: |
+        npm install --no-save
+        /bin/bash -c 'npm audit --audit-level=critical; [[ $? -ge 16 ]] && exit 1 || exit 0'
+        npm run lint

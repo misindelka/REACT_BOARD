@@ -1,0 +1,25 @@
+{
+  "boards": [
+    {
+      "name": "Sudo Academy: Capstone Project",
+      "id": 1
+    }
+  ],
+  "taskGroups": [
+    {
+      "name": "Backlog",
+      "boardId": 1,
+      "taskIds": [1],
+      "id": 1
+    }
+  ],
+  "tasks": [
+    {
+      "name": "Your first task",
+      "content": "git clone and npm install",
+      "boardId": 1,
+      "date": "2021-02-11",
+      "id": 2
+    }
+  ]
+}
