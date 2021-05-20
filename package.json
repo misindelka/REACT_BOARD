@@ -13,10 +13,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^1.0.9",
-    "@chakra-ui/react": "^1.4.1",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
+    "@chakra-ui/icons": "^1.0.9",
+    "@chakra-ui/react": "^1.4.1",
     "date-fns": "^2.20.0",
     "express": "^4.17.1",
     "framer-motion": "^4.0.3",
@@ -25,9 +25,12 @@
     "lodash-es": "^4.17.21",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-animate-text": "^0.4.0",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
-    "react-router-dom": "^6.0.0-beta.0"
+    "react-router-dom": "^6.0.0-beta.0",
+    "react-tsparticles": "^1.27.0",
+    "rxjs": "^6.6.7"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
