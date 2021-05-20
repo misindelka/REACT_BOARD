@@ -103,7 +103,7 @@ const Boards = () => {
           key={board.id}
           borderRadius="lg"
           overflow="hidden"
-          backgroundColor={board.color}
+          backgroundColor={board.color || 'blue.400'}
           shadow="2"
           color="white"
         >
