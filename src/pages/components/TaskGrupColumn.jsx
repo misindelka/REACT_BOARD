@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Box, Button } from '@chakra-ui/react'
 import { TaskCard } from './TaskCard'
 
-export const TaskGroupColumn = () => {
+export const TaskGroupColumn = ({ group }) => {
   return (
     <Box
       m="2"
@@ -24,7 +24,7 @@ export const TaskGroupColumn = () => {
         fontWeight="bold"
         textAlign="center"
       >
-        Task Group Name
+        {group.name}
       </Box>
       <TaskCard />
       <Box m="2">

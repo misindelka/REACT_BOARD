@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Grid, Button, Text } from '@chakra-ui/react'
 import { getBoard } from '../utils/api'
-import { TaskGroupColumn } from './components/TaskGrupColumn'
+import TaskGrpups from './TaskGroups'
 
 const Board = () => {
   const { id } = useParams()
@@ -22,6 +22,7 @@ const Board = () => {
       // do nothing
     }
   }, [id])
+  console.log(board.id)
 
   return (
     <Box h="100vh" bg="gray.100" p="2">
@@ -29,7 +30,7 @@ const Board = () => {
         {board.name}
       </Text>
       <Grid gridTemplateColumns={['auto', '15rem auto']} gap="4">
-        <TaskGroupColumn />
+        <TaskGrpups boardId={board.id} />
         <Box m="4">
           <Button colorScheme="blue">+ Add new group </Button>
         </Box>
