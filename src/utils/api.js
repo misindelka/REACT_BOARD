@@ -90,7 +90,7 @@ export async function createTask(boardId, taskGroupId, data) {
     assignedTo: [],
     ...data,
     boardId,
-    date: format(Date.now(), 'yyyy-MM-dd'),
+    date: format(Date.now(), 'dd.MM.yyyy'),
   }
   const task = await post(`${baseURL}/tasks`, defaultTaskData)
   const taskGroup = await get(`${baseURL}/taskGroups/${taskGroupId}`)
