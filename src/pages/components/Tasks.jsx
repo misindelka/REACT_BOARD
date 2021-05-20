@@ -1,12 +1,13 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import * as React from 'react'
-import { Grid, Box } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 // import { id } from 'date-fns/locale'
 
 import { getTasks } from '../../utils/api'
 
-// eslint-disable-next-line react/prop-types
 const Tasks = ({ boardId }) => {
-  // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('loading')
   const [tasks, setTasks] = React.useState([])
 
@@ -23,7 +24,7 @@ const Tasks = ({ boardId }) => {
   }, [boardId])
 
   return (
-    <Grid gap="4">
+    <>
       {tasks.map((task) => (
         <Box
           key={task.id}
@@ -44,13 +45,13 @@ const Tasks = ({ boardId }) => {
             <Box m="3" letterSpacing="wide" fontSize="xl" ml="2">
               {task.content}
             </Box>
-            <Box m="3" letterSpacing="wide" fontSize="xl" ml="2">
+            <Box m="3" letterSpacing="wide" fontSize="xs" ml="2">
               {task.date}
             </Box>
           </Box>
         </Box>
       ))}
-    </Grid>
+    </>
   )
 }
 
