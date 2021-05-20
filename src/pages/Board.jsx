@@ -27,9 +27,9 @@ const Board = () => {
   return (
     <Box h="100vh" bg="gray.100" p="2">
       <Text p="3" fontWeight="bold">
-        BOARD NAME
+        {board.name}
       </Text>
-      <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+      <Grid gridTemplateColumns={['auto', '15rem auto']} gap="4">
         <TaskGroupColumn />
         <Box m="4">
           <Button colorScheme="blue">+ Add new group </Button>
