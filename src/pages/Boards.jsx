@@ -27,7 +27,7 @@ const Boards = () => {
   // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('loading')
   const [boards, setBoards] = React.useState([])
-  const [boardName, setBoardName] = React.useState('')
+  const [newBoardName, setNewBoardName] = React.useState('')
   const [boardColor, setBoardColor] = React.useState('blue.400')
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -48,24 +48,32 @@ const Boards = () => {
     } catch (e) {
       //  do nothing
     }
-  }, [boardName, boardColor])
+  }, [newBoardName, boardColor])
 
-  function handleAddBoardName(event) {
+  function handleAddBoard(event) {
     event.preventDefault()
-    setBoardName(event.target.value)
+    setNewBoardName(event.target.value)
   }
 
   function handleAddNewBoard() {
-    if (boardName === '') {
+    if (newBoardName === '') {
       toast({
         title: 'You need to input the board name.',
         status: 'error',
         duration: 3000,
         isClosable: true,
       })
+    } else if (boards.map((board) => board.name.includes(newBoardName))) {
+      toast({
+        title: 'Board with this name already exists',
+        description: 'Please enter new board name',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
     } else {
-      createBoard(boardName, boardColor)
-      setBoardName('')
+      createBoard(newBoardName, boardColor)
+      setNewBoardName('')
       onClose()
     }
   }
@@ -129,8 +137,8 @@ const Boards = () => {
               <Input
                 required
                 variant="flushed"
-                value={boardName}
-                onChange={(e) => handleAddBoardName(e)}
+                value={newBoardName}
+                onChange={(e) => handleAddBoard(e)}
                 placeholder="Board Name"
               />
             </FormControl>
