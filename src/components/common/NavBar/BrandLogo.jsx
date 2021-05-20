@@ -7,7 +7,7 @@ const BrandLogo = ({ size = '3xl' }) => {
   return (
     <Text as="a" href="/" fontSize={size} fontWeight="bold" lineHeight="1">
       <Icon as={HiOutlineViewBoards} color="blue.400" mr={2} />
-      reboard
+      ReactBoard
     </Text>
   )
 }
