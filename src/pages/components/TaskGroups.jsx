@@ -28,6 +28,7 @@ const TaskGrpups = ({ boardId }) => {
     <Grid gridTemplateColumns={['auto', '15rem auto']} gap="4">
       {groups.map((group) => (
         <Box
+          key={group.id}
           m="2"
           maxW="md"
           borderWidth="1px"
