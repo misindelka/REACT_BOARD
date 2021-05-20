@@ -28,7 +28,7 @@ const Boards = () => {
   const [status, setStatus] = React.useState('loading')
   const [boards, setBoards] = React.useState([])
   const [boardName, setBoardName] = React.useState('')
-  const [boardColor, setBoardColor] = React.useState('blue')
+  const [boardColor, setBoardColor] = React.useState('blue.400')
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 

@@ -7,9 +7,10 @@ const baseURL = import.meta.env.VITE_API_HOST
 
 /* Boards */
 
-export async function createBoard(name) {
+export async function createBoard(name, color) {
   const defaultBoardData = {
     name: name || '',
+    color: color || 'blue.400',
   }
   return post(`${baseURL}/boards`, defaultBoardData)
 }
