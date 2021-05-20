@@ -14,7 +14,7 @@ const Board = () => {
     try {
       const fetchData = async () => {
         const data = await getBoard(id)
-        console.log('getBoard', getBoard)
+
         setBoard(data)
       }
       fetchData()
@@ -23,7 +23,6 @@ const Board = () => {
     }
   }, [id])
 
-  console.log('board', board)
   return (
     <Box h="100vh" bg="gray.100" p="2">
       <Text p="3" fontWeight="bold">
