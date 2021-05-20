@@ -63,14 +63,14 @@ const Boards = () => {
         duration: 3000,
         isClosable: true,
       })
-    } else if (boards.map((board) => board.name.includes(newBoardName))) {
-      toast({
-        title: 'Board with this name already exists',
-        description: 'Please enter new board name',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-      })
+      // } else if (!boards.map((board) => board.name.includes(newBoardName))) {
+      //   toast({
+      //     title: 'Board with this name already exists',
+      //     description: 'Please enter new board name',
+      //     status: 'error',
+      //     duration: 3000,
+      //     isClosable: true,
+      //   })
     } else {
       createBoard(newBoardName, boardColor)
       setNewBoardName('')
