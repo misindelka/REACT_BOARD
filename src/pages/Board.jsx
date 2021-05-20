@@ -86,9 +86,10 @@ const Board = () => {
     createTask(boardId, taskGroupId, {
       name: newTaskName,
       content: newTaskContent,
-      assignedTo: [1],
+      assignedTo: (rest) => [...rest, taskGroupId],
     })
     setNewTaskContent('')
+    setNewTaskName('')
   }
 
   function handleAddNewGroup(e) {
@@ -128,26 +129,28 @@ const Board = () => {
             </Box>
             <Box>
               {tasks.map((task) => (
-                <Box
-                  key={task.id}
-                  m="2"
-                  maxW="md"
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                  background="white"
-                  shadow="2"
-                >
-                  <Box textAlign="center">
-                    <Text fontWeight="bold" textTransform="uppercase" pt="3" fontSize="xl">
-                      {task.name}
-                    </Text>
-                    <Text p="3">{task.content}</Text>
-                    <Text pb="2" color="gray" fontSize="11px">
-                      {task.date}
-                    </Text>
+                <>
+                  <Box
+                    key={task.id}
+                    m="2"
+                    maxW="md"
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    overflow="hidden"
+                    background="white"
+                    shadow="2"
+                  >
+                    <Box textAlign="center">
+                      <Text fontWeight="bold" textTransform="uppercase" pt="3" fontSize="xl">
+                        {task.name}
+                      </Text>
+                      <Text p="3">{task.content}</Text>
+                      <Text pb="2" color="gray" fontSize="11px">
+                        {task.date}
+                      </Text>
+                    </Box>
                   </Box>
-                </Box>
+                </>
               ))}
             </Box>
             <Box m="2">
