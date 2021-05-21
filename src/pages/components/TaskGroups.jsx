@@ -48,7 +48,15 @@ const TaskGrpups = ({ boardId }) => {
           >
             {group.name}
           </Box>
-          <Tasks boardId={boardId} />
+          <Box overflowY="scroll" h="300px">
+            <Tasks boardId={boardId} />
+            <Tasks boardId={boardId} />
+            <Tasks boardId={boardId} />
+            <Tasks boardId={boardId} />
+            <Tasks boardId={boardId} />
+            <Tasks boardId={boardId} />
+          </Box>
+
           <Box m="2">
             <Button colorScheme="blue">+ Add new task</Button>
           </Box>
