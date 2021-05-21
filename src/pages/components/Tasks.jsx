@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as React from 'react'
 import { Text, Box } from '@chakra-ui/react'
 // import { id } from 'date-fns/locale'

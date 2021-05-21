@@ -3,8 +3,7 @@ import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 // import { id } from 'date-fns/locale'
 
-import { getTaskGroups, createTask } from '../../utils/api'
-
+import { getTaskGroups, createTask, updateTaskGroups } from '../../utils/api'
 import Tasks from './Tasks'
 import { AddNewTask } from '../Board/AddNewTask'
 
@@ -28,8 +27,12 @@ export const TaskGroups = ({ boardId }) => {
     }
   }, [boardId, groups])
 
+  // const updateTaskGroupsById = groups.map((i) => i)
+  // console.log(updateTaskGroupsById)
+
   const handleCreateTasks = (newTask) => {
     createTask(boardId, ref.current.id, newTask)
+    updateTaskGroups(newTask.id)
     onClose()
   }
 
