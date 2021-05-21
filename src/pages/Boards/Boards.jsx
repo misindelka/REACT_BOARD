@@ -1,41 +1,21 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import {
-  Box,
-  Button,
-  Center,
-  FormControl,
-  Grid,
-  Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
-  Spinner,
-  useToast,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Box, Button, Center, Grid, Spinner, useToast, useDisclosure } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
 // import { id } from 'date-fns/locale'
-import { getBoards, createBoard } from '../utils/api'
+import { getBoards, createBoard } from '../../utils/api'
+import { AddBoardForm } from './AddBoardForm'
 
 const Boards = () => {
   // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('loading')
   const [boards, setBoards] = React.useState([])
-  const [newBoardName, setNewBoardName] = React.useState('')
-  const [boardColor, setBoardColor] = React.useState('blue.400')
+
+  // const [boardColor, setBoardColor] = React.useState('blue.400')
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const toast = useToast()
-
-  const initialRef = React.useRef()
-  const finalRef = React.useRef()
 
   React.useEffect(() => {
     try {
@@ -48,15 +28,10 @@ const Boards = () => {
     } catch (e) {
       //  do nothing
     }
-  }, [newBoardName, boardColor])
+  }, [boards])
 
-  function handleAddBoard(event) {
-    event.preventDefault()
-    setNewBoardName(event.target.value)
-  }
-
-  function handleAddNewBoard() {
-    if (newBoardName === '') {
+  const handleCreateBoard = (newBoard) => {
+    if (newBoard === '') {
       toast({
         title: 'You need to input the board name.',
         status: 'error',
@@ -72,8 +47,7 @@ const Boards = () => {
       //     isClosable: true,
       //   })
     } else {
-      createBoard(newBoardName, boardColor)
-      setNewBoardName('')
+      createBoard(newBoard.name, newBoard.color)
       onClose()
     }
   }
@@ -121,49 +95,12 @@ const Boards = () => {
       <Button m="3" leftIcon={<PlusSquareIcon />} variant="outline" onClick={onOpen}>
         Add new board
       </Button>
-
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
+      <AddBoardForm
+        handleCreateBoard={handleCreateBoard}
         isOpen={isOpen}
+        onOpen={onOpen}
         onClose={onClose}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Create new board</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl mt={4}>
-              <Input
-                required
-                variant="flushed"
-                value={newBoardName}
-                onChange={(e) => handleAddBoard(e)}
-                placeholder="Board Name"
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <Select
-                defaultValue="blue.400"
-                onChange={(e) => setBoardColor(e.target.value)}
-                variant="flushed"
-                placeholder="Board color"
-              >
-                <option value="blue.400">Blue</option>
-                <option value="red.400">Red</option>
-                <option value="green.400">Green</option>
-              </Select>
-            </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button onClick={handleAddNewBoard} colorScheme="blue" mr={3}>
-              Create board
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      />
     </Grid>
   )
 }
