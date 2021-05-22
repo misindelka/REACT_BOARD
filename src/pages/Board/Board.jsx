@@ -31,7 +31,7 @@ const Board = () => {
     <Box
       overflowX="scroll"
       overflowY={['scroll', 'hidden']}
-      minW="100vw" // upravit
+      minW="100vw"
       h={['87vh', '93vh']}
       bg="gray.100"
       p="2"
