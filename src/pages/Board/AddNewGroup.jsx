@@ -1,0 +1,80 @@
+/* eslint-disable react/prop-types */
+import * as React from 'react'
+import {
+  Box,
+  Button,
+  Input,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
+} from '@chakra-ui/react'
+import { PlusSquareIcon } from '@chakra-ui/icons'
+
+const initialGroupValue = {
+  name: '',
+  boardId: null,
+}
+
+export const AddNewGroup = ({ handleCreateGroup, boardId }) => {
+  const [newGroup, setNewGroup] = React.useState(initialGroupValue)
+
+  const handleAddNewGroup = (e) => {
+    const { name, value } = e.target
+    setNewGroup({ ...newGroup, [name]: value, boardId })
+  }
+  const handleSubmitNewGroup = (e) => {
+    e.preventDefault()
+    handleCreateGroup(newGroup)
+    setNewGroup(initialGroupValue)
+  }
+  return (
+    <Box
+      textColor="white"
+      borderRadius="lg"
+      textTransform="uppercase"
+      letterSpacing="wide"
+      fontWeight="bold"
+      textAlign="center"
+      p="4"
+    >
+      <Popover>
+        <PopoverTrigger>
+          <Button
+            textTransform="uppercase"
+            letterSpacing="wide"
+            fontWeight="bold"
+            color="white"
+            leftIcon={<PlusSquareIcon />}
+            p="7"
+            w="100%"
+            background="blue.400"
+          >
+            Add new group
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <PopoverArrow />
+          <PopoverCloseButton />
+          <PopoverHeader color="blackAlpha.700">Please input group name</PopoverHeader>
+          <PopoverBody>
+            <Input
+              name="name"
+              color="black"
+              variant="flushed"
+              placeholder="Group name here"
+              value={newGroup.name}
+              onChange={handleAddNewGroup}
+            />
+            <Button onClick={handleSubmitNewGroup} w="80%" background="blue.400" mt="3">
+              Add
+            </Button>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+    </Box>
+  )
+}

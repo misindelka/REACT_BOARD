@@ -1,30 +1,14 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-console */
 import * as React from 'react'
-import { Grid, Box } from '@chakra-ui/react'
+import { Text, Box } from '@chakra-ui/react'
 // import { id } from 'date-fns/locale'
 
-import { getTasks } from '../../utils/api'
-
 // eslint-disable-next-line react/prop-types
-const Tasks = ({ boardId }) => {
-  // eslint-disable-next-line no-unused-vars
-  const [status, setStatus] = React.useState('loading')
-  const [tasks, setTasks] = React.useState([])
-
-  React.useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await getTasks(boardId)
-        setTasks(data)
-      }
-      fetchData()
-    } catch (e) {
-      console.log(e)
-    }
-  }, [boardId])
-
+const Tasks = ({ task }) => {
   return (
-    <Grid gap="4">
-      {tasks.map((task) => (
+    <Box>
+      <>
         <Box
           key={task.id}
           m="2"
@@ -35,22 +19,18 @@ const Tasks = ({ boardId }) => {
           background="white"
           shadow="2"
         >
-          <Box p="3">
-            <Box d="flex" alignItems="center">
-              <Box letterSpacing="wide" fontSize="lg" ml="2">
-                {task.name}
-              </Box>
-            </Box>
-            <Box m="3" letterSpacing="wide" fontSize="xl" ml="2">
-              {task.content}
-            </Box>
-            <Box m="3" letterSpacing="wide" fontSize="xl" ml="2">
+          <Box textAlign="center">
+            <Text fontWeight="bold" textTransform="uppercase" pt="3" fontSize="xl">
+              {task.name}
+            </Text>
+            <Text p="3">{task.content}</Text>
+            <Text pb="2" color="gray" fontSize="11px">
               {task.date}
-            </Box>
+            </Text>
           </Box>
         </Box>
-      ))}
-    </Grid>
+      </>
+    </Box>
   )
 }
 

@@ -83,21 +83,22 @@ export async function getTask(taskId) {
 }
 
 export async function createTask(boardId, taskGroupId, data) {
-	const defaultTaskData = {
-		name: '',
-		content: '',
-		minutes: 0,
-		completedMinutes: 0,
-		assignedTo: [],
-		...data,
-		boardId,
-		date: format(Date.now(), 'yyyy-MM-dd')
-	}
-	const task = await post(`${baseURL}/tasks`, defaultTaskData)
-	const taskGroup = await get(`${baseURL}/taskGroups/${taskGroupId}`)
-	const newTaskIds = taskGroup.taskIds.concat(task.id)
-	await patch(`${baseURL}/taskGroups/${taskGroupId}`, { taskIds: newTaskIds })
-	return task
+  const defaultTaskData = {
+    name: '',
+    content: '',
+    minutes: 0,
+    completedMinutes: 0,
+    assignedTo: [],
+    ...data,
+    boardId,
+    date: format(Date.now(), 'dd.MM.yyyy'),
+  }
+  const task = await post(`${baseURL}/tasks`, defaultTaskData)
+  const taskGroup = await get(`${baseURL}/taskGroups/${taskGroupId}`)
+  const newTaskIds = taskGroup.taskIds.concat(task.id)
+  await patch(`${baseURL}/taskGroups/${taskGroupId}`, { taskIds: newTaskIds })
+  return task
+
 }
 
 export function updateTask(taskId, task) {
