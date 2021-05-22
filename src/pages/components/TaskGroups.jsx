@@ -75,6 +75,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup }) => {
             {tasks.map((task) => {
               return group.taskIds.includes(task.id) ? <Tasks task={task} /> : null
             })}
+
           </Box>
 
           <Box m="2">

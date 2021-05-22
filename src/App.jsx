@@ -5,6 +5,7 @@ import { NavBar } from './components'
 import Dashboard from './pages/Dashboard'
 import Boards from './pages/Boards'
 import Board from './pages/Board/Board'
+
 import NotFound from './pages/404'
 
 function App() {
