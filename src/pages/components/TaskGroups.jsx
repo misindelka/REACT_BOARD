@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
-// import { id } from 'date-fns/locale'
-
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { getTaskGroups, createTask, getTasks, removeTaskGroup } from '../../utils/api'
 import Tasks from './Tasks'
@@ -10,7 +8,7 @@ import { AddNewTask } from '../Board/AddNewTask'
 import { AddNewGroup } from '../Board/AddNewGroup'
 
 // eslint-disable-next-line react/prop-types
-export const TaskGroups = ({ boardId, handleCreateGroup }) => {
+export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
   // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('loading')
   const [groups, setGroups] = React.useState([])
@@ -63,7 +61,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup }) => {
         >
           <Box
             m="2"
-            backgroundColor="blue.500"
+            backgroundColor={boardColor}
             textColor="white"
             borderRadius="lg"
             textTransform="uppercase"
@@ -100,11 +98,13 @@ export const TaskGroups = ({ boardId, handleCreateGroup }) => {
                 onOpen()
                 setCurrentGroupId(group.id)
               }}
-              colorScheme="blue"
+              color="white"
+              background={boardColor}
             >
               + Add new task
             </Button>
             <AddNewTask
+              boardColor={boardColor}
               isOpen={isOpen}
               onOpen={onOpen}
               onClose={onClose}
@@ -113,7 +113,11 @@ export const TaskGroups = ({ boardId, handleCreateGroup }) => {
           </Box>
         </Box>
       ))}
-      <AddNewGroup boardId={boardId} handleCreateGroup={handleCreateGroup} />
+      <AddNewGroup
+        boardColor={boardColor}
+        boardId={boardId}
+        handleCreateGroup={handleCreateGroup}
+      />
     </>
   )
 }

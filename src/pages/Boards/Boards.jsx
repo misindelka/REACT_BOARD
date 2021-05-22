@@ -51,8 +51,8 @@ const Boards = () => {
           alignItems="center"
           minH="10vh"
           as={Link}
+          to={`/boards/${board.id}?color=${board.color}`}
           m="3"
-          to={`/boards/${board.id}`}
           key={board.id}
           borderRadius="lg"
           overflow="hidden"

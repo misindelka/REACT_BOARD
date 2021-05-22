@@ -2,7 +2,8 @@
   "boards": [
     {
       "name": "Sudo Academy: Capstone Project",
-      "id": 1
+      "id": 1,
+      "color": "blue.400"
     }
   ],
   "taskGroups": [

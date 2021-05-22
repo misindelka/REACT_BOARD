@@ -20,7 +20,7 @@ const initialNewTaskValue = {
   content: '',
 }
 
-export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId }) => {
+export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId, boardColor }) => {
   const [newTask, setNewTask] = React.useState(initialNewTaskValue)
 
   const handleAddNewTask = (e) => {
@@ -68,7 +68,8 @@ export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId }) => {
           <Button
             isDisabled={!newTask.name || !newTask.content}
             onClick={(e) => handleSubmitForm(e)}
-            colorScheme="blue"
+            color="white"
+            background={boardColor}
             mr={3}
           >
             Add task
