@@ -3,7 +3,6 @@ import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Grid, Text } from '@chakra-ui/react'
 import { TaskGroups } from '../components/TaskGroups'
-import { AddNewGroup } from './AddNewGroup'
 import { createTaskGroup, getBoard } from '../../utils/api'
 
 const Board = () => {
@@ -35,8 +34,7 @@ const Board = () => {
       </Text>
 
       <Grid gridTemplateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr 1fr' }}>
-        <TaskGroups boardId={id} />
-        <AddNewGroup boardId={id} handleCreateGroup={handleCreateGroup} />
+        <TaskGroups boardId={id} handleCreateGroup={handleCreateGroup} />
       </Grid>
     </Box>
   )
