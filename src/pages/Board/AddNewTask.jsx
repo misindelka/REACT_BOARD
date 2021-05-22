@@ -20,7 +20,7 @@ const initialNewTaskValue = {
   content: '',
 }
 
-export const AddNewTask = ({ handleCreateTask, isOpen, onClose }) => {
+export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId }) => {
   const [newTask, setNewTask] = React.useState(initialNewTaskValue)
 
   const handleAddNewTask = (e) => {
@@ -30,7 +30,7 @@ export const AddNewTask = ({ handleCreateTask, isOpen, onClose }) => {
 
   const handleSubmitForm = (e) => {
     e.preventDefault()
-    handleCreateTask(newTask)
+    handleCreateTask(newTask, groupId)
     onClose()
     setNewTask(initialNewTaskValue)
   }

@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 // import { id } from 'date-fns/locale'
 
-import { getTaskGroups, createTask, updateTaskGroups } from '../../utils/api'
+import { getTaskGroups, createTask } from '../../utils/api'
 import Tasks from './Tasks'
 import { AddNewTask } from '../Board/AddNewTask'
 
@@ -12,8 +12,8 @@ export const TaskGroups = ({ boardId }) => {
   // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('loading')
   const [groups, setGroups] = React.useState([])
+  const [currentGroupId, setCurrentGroupId] = React.useState()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const ref = React.useRef()
 
   React.useEffect(() => {
     try {
@@ -27,12 +27,8 @@ export const TaskGroups = ({ boardId }) => {
     }
   }, [boardId, groups])
 
-  // const updateTaskGroupsById = groups.map((i) => i)
-  // console.log(updateTaskGroupsById)
-
   const handleCreateTasks = (newTask) => {
-    createTask(boardId, ref.current.id, newTask)
-    updateTaskGroups(newTask.id)
+    createTask(boardId, currentGroupId, newTask)
     onClose()
   }
 
@@ -40,13 +36,13 @@ export const TaskGroups = ({ boardId }) => {
     <>
       {groups.map((group) => (
         <Box
-          ref={ref}
           key={group.id}
           m="2"
           maxW="md"
           borderWidth="1px"
           borderRadius="lg"
-          overflow="hidden"
+          overflowY="scroll"
+          maxH="75vh"
           backgroundColor="#F7FAFC"
         >
           <Box
@@ -66,18 +62,24 @@ export const TaskGroups = ({ boardId }) => {
           </Box>
 
           <Box m="2">
-            <Button onClick={onOpen} colorScheme="blue">
+            <Button
+              onClick={() => {
+                onOpen()
+                setCurrentGroupId(group.id)
+              }}
+              colorScheme="blue"
+            >
               + Add new task
             </Button>
+            <AddNewTask
+              isOpen={isOpen}
+              onOpen={onOpen}
+              onClose={onClose}
+              handleCreateTask={handleCreateTasks}
+            />
           </Box>
         </Box>
       ))}
-      <AddNewTask
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-        handleCreateTask={handleCreateTasks}
-      />
     </>
   )
 }

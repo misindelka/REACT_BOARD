@@ -19,12 +19,12 @@ const initialGroupValue = {
   boardId: null,
 }
 
-export const AddNewGroup = ({ handleCreateGroup, boardId }) => {
+export const AddNewGroup = ({ handleCreateGroup }) => {
   const [newGroup, setNewGroup] = React.useState(initialGroupValue)
 
   const handleAddNewGroup = (e) => {
     const { name, value } = e.target
-    setNewGroup({ ...newGroup, [name]: value, boardId })
+    setNewGroup({ ...newGroup, [name]: value })
   }
   const handleSubmitNewGroup = (e) => {
     e.preventDefault()

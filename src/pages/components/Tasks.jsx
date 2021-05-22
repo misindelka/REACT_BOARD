@@ -37,6 +37,7 @@ const Tasks = ({ boardId }) => {
             background="white"
             shadow="2"
           >
+            {task.id}
             <Box textAlign="center">
               <Text fontWeight="bold" textTransform="uppercase" pt="3" fontSize="xl">
                 {task.name}
