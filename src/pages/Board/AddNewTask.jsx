@@ -65,10 +65,22 @@ export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId }) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={(e) => handleSubmitForm(e)} colorScheme="blue" mr={3}>
+          <Button
+            isDisabled={!newTask.name || !newTask.content}
+            onClick={(e) => handleSubmitForm(e)}
+            colorScheme="blue"
+            mr={3}
+          >
             Add task
           </Button>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button
+            onClick={() => {
+              setNewTask(initialNewTaskValue)
+              onClose()
+            }}
+          >
+            Cancel
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

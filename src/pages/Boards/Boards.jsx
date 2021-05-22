@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Button, Center, Grid, Spinner, useToast, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Center, Grid, Spinner, useDisclosure } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
 // import { id } from 'date-fns/locale'
 import { getBoards, createBoard } from '../../utils/api'
@@ -11,11 +11,7 @@ const Boards = () => {
   const [status, setStatus] = React.useState('loading')
   const [boards, setBoards] = React.useState([])
 
-  // const [boardColor, setBoardColor] = React.useState('blue.400')
-
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const toast = useToast()
 
   React.useEffect(() => {
     try {
@@ -31,25 +27,8 @@ const Boards = () => {
   }, [boards])
 
   const handleCreateBoard = (newBoard) => {
-    if (newBoard === '') {
-      toast({
-        title: 'You need to input the board name.',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-      })
-      // } else if (!boards.map((board) => board.name.includes(newBoardName))) {
-      //   toast({
-      //     title: 'Board with this name already exists',
-      //     description: 'Please enter new board name',
-      //     status: 'error',
-      //     duration: 3000,
-      //     isClosable: true,
-      //   })
-    } else {
-      createBoard(newBoard.name, newBoard.color)
-      onClose()
-    }
+    createBoard(newBoard.name, newBoard.color)
+    onClose()
   }
   return status !== 'done' ? (
     <Center>
@@ -79,6 +58,7 @@ const Boards = () => {
           overflow="hidden"
           backgroundColor={board.color || 'blue.400'}
           shadow="2"
+          h="250px"
           color="white"
         >
           <Box
@@ -92,7 +72,14 @@ const Boards = () => {
           </Box>
         </Box>
       ))}
-      <Button m="3" leftIcon={<PlusSquareIcon />} variant="outline" onClick={onOpen}>
+      <Button
+        m="3"
+        h="250px"
+        borderStyle="groove"
+        leftIcon={<PlusSquareIcon />}
+        variant="outline"
+        onClick={onOpen}
+      >
         Add new board
       </Button>
       <AddBoardForm

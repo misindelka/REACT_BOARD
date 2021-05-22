@@ -49,7 +49,8 @@ export const AddNewGroup = ({ handleCreateGroup, boardId }) => {
             fontWeight="bold"
             color="white"
             leftIcon={<PlusSquareIcon />}
-            p="7"
+            p="9"
+            mt="-2"
             w="100%"
             background="blue.400"
           >
@@ -69,7 +70,13 @@ export const AddNewGroup = ({ handleCreateGroup, boardId }) => {
               value={newGroup.name}
               onChange={handleAddNewGroup}
             />
-            <Button onClick={handleSubmitNewGroup} w="80%" background="blue.400" mt="3">
+            <Button
+              isDisabled={!newGroup.name}
+              onClick={handleSubmitNewGroup}
+              w="80%"
+              background="blue.400"
+              mt="3"
+            >
               Add
             </Button>
           </PopoverBody>

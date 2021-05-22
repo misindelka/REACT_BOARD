@@ -67,7 +67,7 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={handleSubmitForm} colorScheme="blue" mr={3}>
+          <Button isDisabled={!newBoard.name} onClick={handleSubmitForm} colorScheme="blue" mr={3}>
             Create board
           </Button>
           <Button onClick={onClose}>Cancel</Button>

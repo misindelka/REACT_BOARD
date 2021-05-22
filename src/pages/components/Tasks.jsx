@@ -2,10 +2,12 @@
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Text, Box } from '@chakra-ui/react'
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { removeTask } from '../../utils/api'
 // import { id } from 'date-fns/locale'
 
 // eslint-disable-next-line react/prop-types
-const Tasks = ({ task }) => {
+const Tasks = ({ task, boardId }) => {
   return (
     <Box>
       <>
@@ -19,6 +21,22 @@ const Tasks = ({ task }) => {
           background="white"
           shadow="2"
         >
+          <EditIcon
+            onClick={() => {
+              console.log('hey')
+            }}
+            float="left"
+            boxSize="1.3em"
+            m="2"
+          />
+          <DeleteIcon
+            onClick={() => {
+              removeTask(boardId, task.id)
+            }}
+            float="right"
+            boxSize="1.3em"
+            m="2"
+          />
           <Box textAlign="center">
             <Text fontWeight="bold" textTransform="uppercase" pt="3" fontSize="xl">
               {task.name}
