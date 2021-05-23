@@ -1,14 +1,11 @@
 import * as React from 'react'
-
-import { Box, Button, Center, Grid, Spinner, useToast, useDisclosure } from '@chakra-ui/react'
+import { Button, Center, Grid, Spinner, useToast, useDisclosure } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
-// import { id } from 'date-fns/locale'
-import { getBoards, createBoard } from '../../utils/api'
+import { getBoards, createBoard, removeBoard } from '../../utils/api'
 import { AddBoardForm } from './AddBoardForm'
 import { BoardCard } from '../components/BordCard'
 
 const Boards = () => {
-  // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('loading')
   const [boards, setBoards] = React.useState([])
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -41,6 +38,11 @@ const Boards = () => {
       onClose()
     }
   }
+
+  const handleRemoveBoard = (boardId) => {
+    removeBoard(boardId)
+  }
+
   return status !== 'done' ? (
     <Center>
       <Spinner
@@ -55,7 +57,7 @@ const Boards = () => {
   ) : (
     <Grid mt="3" gridTemplateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr 1fr' }}>
       {boards.map((board) => (
-        <BoardCard key={board.id} board={board} />
+        <BoardCard key={board.id} board={board} handleRemoveBoard={handleRemoveBoard} />
       ))}
       <Button m="3" leftIcon={<PlusSquareIcon />} variant="outline" onClick={onOpen}>
         Add new board
