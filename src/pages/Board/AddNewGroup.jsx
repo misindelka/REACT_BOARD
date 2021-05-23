@@ -19,7 +19,7 @@ const initialGroupValue = {
   boardId: null,
 }
 
-export const AddNewGroup = ({ handleCreateGroup, boardId }) => {
+export const AddNewGroup = ({ handleCreateGroup, boardId, boardColor }) => {
   const [newGroup, setNewGroup] = React.useState(initialGroupValue)
 
   const handleAddNewGroup = (e) => {
@@ -49,9 +49,10 @@ export const AddNewGroup = ({ handleCreateGroup, boardId }) => {
             fontWeight="bold"
             color="white"
             leftIcon={<PlusSquareIcon />}
-            p="7"
+            p="9"
+            mt="-2"
             w="100%"
-            background="blue.400"
+            background={boardColor}
           >
             Add new group
           </Button>
@@ -69,7 +70,14 @@ export const AddNewGroup = ({ handleCreateGroup, boardId }) => {
               value={newGroup.name}
               onChange={handleAddNewGroup}
             />
-            <Button onClick={handleSubmitNewGroup} w="80%" background="blue.400" mt="3">
+            <Button
+              isDisabled={!newGroup.name}
+              onClick={handleSubmitNewGroup}
+              w="80%"
+              mt="3"
+              background={boardColor}
+              color="white"
+            >
               Add
             </Button>
           </PopoverBody>

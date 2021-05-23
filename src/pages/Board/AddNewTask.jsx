@@ -20,7 +20,7 @@ const initialNewTaskValue = {
   content: '',
 }
 
-export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId }) => {
+export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId, boardColor }) => {
   const [newTask, setNewTask] = React.useState(initialNewTaskValue)
 
   const handleAddNewTask = (e) => {
@@ -65,10 +65,23 @@ export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId }) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={(e) => handleSubmitForm(e)} colorScheme="blue" mr={3}>
+          <Button
+            isDisabled={!newTask.name || !newTask.content}
+            onClick={(e) => handleSubmitForm(e)}
+            color="white"
+            background={boardColor}
+            mr={3}
+          >
             Add task
           </Button>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button
+            onClick={() => {
+              setNewTask(initialNewTaskValue)
+              onClose()
+            }}
+          >
+            Cancel
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

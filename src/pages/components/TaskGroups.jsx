@@ -1,15 +1,14 @@
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
-// import { id } from 'date-fns/locale'
-
-import { getTaskGroups, createTask, getTasks } from '../../utils/api'
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { getTaskGroups, createTask, getTasks, removeTaskGroup } from '../../utils/api'
 import Tasks from './Tasks'
 import { AddNewTask } from '../Board/AddNewTask'
 import { AddNewGroup } from '../Board/AddNewGroup'
 
 // eslint-disable-next-line react/prop-types
-export const TaskGroups = ({ boardId, handleCreateGroup }) => {
+export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
   // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('loading')
   const [groups, setGroups] = React.useState([])
@@ -51,27 +50,39 @@ export const TaskGroups = ({ boardId, handleCreateGroup }) => {
       {groups.map((group) => (
         <Box
           key={group.id}
-          m="2"
-          maxW="md"
+          shadow="xl"
+          minH="17.5vh"
+          maxH={['78vh', '83.3vh']}
+          minW="350px"
           borderWidth="1px"
           borderRadius="lg"
-          overflowY="scroll"
-          maxH="75vh"
           backgroundColor="#F7FAFC"
+          overflowY={['scroll', 'hidden']}
         >
           <Box
             m="2"
-            backgroundColor="blue.500"
+            backgroundColor={boardColor}
             textColor="white"
             borderRadius="lg"
             textTransform="uppercase"
             letterSpacing="wide"
             fontWeight="bold"
             textAlign="center"
+            p="5"
+            fontSize="2xl"
           >
+            <EditIcon float="left" w="4" h="8" />
             {group.name}
+            <DeleteIcon
+              onClick={() => {
+                removeTaskGroup(group.id)
+              }}
+              float="right"
+              w="4"
+              h="8"
+            />
           </Box>
-          <Box overflowY="scroll" h="300px">
+          <Box maxH={['55vh', '68vh']} overflowY="scroll">
             {tasks.map((task) => {
               return group.taskIds.includes(task.id) ? <Tasks key={task.id} task={task} /> : null
             })}
@@ -79,15 +90,19 @@ export const TaskGroups = ({ boardId, handleCreateGroup }) => {
 
           <Box m="2">
             <Button
+              w="100%"
+              textTransform="uppercase"
               onClick={() => {
                 onOpen()
                 setCurrentGroupId(group.id)
               }}
-              colorScheme="blue"
+              color="white"
+              background={boardColor}
             >
               + Add new task
             </Button>
             <AddNewTask
+              boardColor={boardColor}
               isOpen={isOpen}
               onOpen={onOpen}
               onClose={onClose}
@@ -96,7 +111,11 @@ export const TaskGroups = ({ boardId, handleCreateGroup }) => {
           </Box>
         </Box>
       ))}
-      <AddNewGroup boardId={boardId} handleCreateGroup={handleCreateGroup} />
+      <AddNewGroup
+        boardColor={boardColor}
+        boardId={boardId}
+        handleCreateGroup={handleCreateGroup}
+      />
     </>
   )
 }

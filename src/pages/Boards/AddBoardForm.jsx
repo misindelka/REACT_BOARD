@@ -17,7 +17,7 @@ import {
 
 const initialNewBoardValue = {
   name: '',
-  color: '',
+  color: 'blue.400',
 }
 export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
   const [newBoard, setNewBoard] = React.useState(initialNewBoardValue)
@@ -68,7 +68,12 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={handleSubmitForm} colorScheme="blue" mr={3}>
+          <Button
+            isDisabled={!newBoard.name}
+            onClick={handleSubmitForm}
+            background={newBoard.color}
+            mr={3}
+          >
             Create board
           </Button>
           <Button onClick={onClose}>Cancel</Button>

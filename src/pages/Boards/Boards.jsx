@@ -13,8 +13,6 @@ const Boards = () => {
   const { isOpen: isOpenCreate, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure()
   const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure()
 
-  const toast = useToast()
-
   React.useEffect(() => {
     try {
       const fetchData = async () => {
