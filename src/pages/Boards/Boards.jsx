@@ -1,18 +1,16 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+
 import { Box, Button, Center, Grid, Spinner, useToast, useDisclosure } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
 // import { id } from 'date-fns/locale'
 import { getBoards, createBoard } from '../../utils/api'
 import { AddBoardForm } from './AddBoardForm'
+import { BoardCard } from '../components/BordCard'
 
 const Boards = () => {
   // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('loading')
   const [boards, setBoards] = React.useState([])
-
-  // const [boardColor, setBoardColor] = React.useState('blue.400')
-
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const toast = useToast()
@@ -26,7 +24,7 @@ const Boards = () => {
       }
       fetchData()
     } catch (e) {
-      //  do nothing
+      console.log(e)
     }
   }, [boards])
 
@@ -38,14 +36,6 @@ const Boards = () => {
         duration: 3000,
         isClosable: true,
       })
-      // } else if (!boards.map((board) => board.name.includes(newBoardName))) {
-      //   toast({
-      //     title: 'Board with this name already exists',
-      //     description: 'Please enter new board name',
-      //     status: 'error',
-      //     duration: 3000,
-      //     isClosable: true,
-      //   })
     } else {
       createBoard(newBoard.name, newBoard.color)
       onClose()
@@ -65,32 +55,7 @@ const Boards = () => {
   ) : (
     <Grid mt="3" gridTemplateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr 1fr' }}>
       {boards.map((board) => (
-        <Box
-          display="flex"
-          p="4"
-          justifyContent="center"
-          alignItems="center"
-          minH="10vh"
-          as={Link}
-          m="3"
-          to={`/boards/${board.id}`}
-          key={board.id}
-          borderRadius="lg"
-          overflow="hidden"
-          backgroundColor={board.color || 'blue.400'}
-          shadow="2"
-          color="white"
-        >
-          <Box
-            textAlign="center"
-            fontWeight="bold"
-            letterSpacing="wide"
-            fontSize="md"
-            textTransform="uppercase"
-          >
-            {board.name}
-          </Box>
-        </Box>
+        <BoardCard key={board.id} board={board} />
       ))}
       <Button m="3" leftIcon={<PlusSquareIcon />} variant="outline" onClick={onOpen}>
         Add new board
