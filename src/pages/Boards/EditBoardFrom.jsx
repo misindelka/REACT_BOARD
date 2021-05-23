@@ -15,30 +15,30 @@ import {
   Select,
 } from '@chakra-ui/react'
 
-const initialNewBoardValue = {
-  name: '',
-  color: '',
-}
-export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
-  const [newBoard, setNewBoard] = React.useState(initialNewBoardValue)
+export const EditBoardForm = ({ handleUpdateBoard, isOpen, onClose, currentBoard }) => {
+  const [editedBoard, setEditedBoard] = React.useState(currentBoard)
 
-  const handleAddNewBoard = (e) => {
+  React.useEffect(() => {
+    setEditedBoard(currentBoard)
+  }, [currentBoard])
+
+  const handleEditBoard = (e) => {
     const { name, value } = e.target
-    setNewBoard({ ...newBoard, [`${name}`]: value })
+    setEditedBoard({ ...editedBoard, [name]: value })
   }
 
   const handleSubmitForm = (e) => {
     e.preventDefault()
-    handleCreateBoard(newBoard)
-    setNewBoard(initialNewBoardValue)
+    handleUpdateBoard(editedBoard)
+    setEditedBoard(editedBoard)
     onClose()
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onCloseEdit={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Create new board</ModalHeader>
+        <ModalHeader>Edit board</ModalHeader>
         <ModalCloseButton />
 
         <ModalBody pb={6}>
@@ -47,16 +47,16 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
               name="name"
               required
               variant="flushed"
-              value={newBoard.name}
-              onChange={handleAddNewBoard}
+              value={editedBoard.name}
+              onChange={handleEditBoard}
               placeholder="Board Name"
             />
           </FormControl>
           <FormControl mt={4}>
             <Select
               name="color"
-              value={newBoard.color}
-              onChange={handleAddNewBoard}
+              value={editedBoard.color}
+              onChange={handleEditBoard}
               variant="flushed"
               placeholder="Board color"
             >
@@ -69,7 +69,7 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
 
         <ModalFooter>
           <Button onClick={handleSubmitForm} colorScheme="blue" mr={3}>
-            Create board
+            Update board
           </Button>
           <Button onClick={onClose}>Cancel</Button>
         </ModalFooter>
