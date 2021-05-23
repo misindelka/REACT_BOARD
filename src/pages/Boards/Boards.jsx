@@ -1,17 +1,17 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
-import { Box, Button, Center, Grid, Spinner, useDisclosure } from '@chakra-ui/react'
+import { Button, Center, Grid, Spinner, useToast, useDisclosure } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
-// import { id } from 'date-fns/locale'
-import { getBoards, createBoard } from '../../utils/api'
+import { getBoards, createBoard, removeBoard, updateBoard } from '../../utils/api'
 import { AddBoardForm } from './AddBoardForm'
+import { BoardCard } from './BoardCard'
+import { EditBoardForm } from './EditBoardFrom'
 
 const Boards = () => {
-  // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('loading')
   const [boards, setBoards] = React.useState([])
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [currentBoard, setCurrentBoard] = React.useState('')
+  const { isOpen: isOpenCreate, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure()
+  const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure()
 
   React.useEffect(() => {
     try {
@@ -22,14 +22,36 @@ const Boards = () => {
       }
       fetchData()
     } catch (e) {
-      //  do nothing
+      console.log(e)
     }
   }, [boards])
 
   const handleCreateBoard = (newBoard) => {
-    createBoard(newBoard.name, newBoard.color)
-    onClose()
+    if (newBoard === '') {
+      toast({
+        title: 'You need to input the board name.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    } else {
+      createBoard(newBoard.name, newBoard.color)
+    }
   }
+
+  const handleRemoveBoard = (boardId) => {
+    removeBoard(boardId)
+  }
+
+  const handleEditBoard = (board) => {
+    setCurrentBoard(board)
+    onOpenEdit()
+  }
+
+  const handleUpdateBoard = (data) => {
+    updateBoard(currentBoard.id, data)
+  }
+
   return status !== 'done' ? (
     <Center>
       <Spinner
@@ -44,49 +66,28 @@ const Boards = () => {
   ) : (
     <Grid mt="3" gridTemplateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr 1fr' }}>
       {boards.map((board) => (
-        <Box
-          display="flex"
-          p="4"
-          justifyContent="center"
-          alignItems="center"
-          minH="10vh"
-          as={Link}
-          to={`/boards/${board.id}?color=${board.color}`}
-          m="3"
+        <BoardCard
           key={board.id}
-          borderRadius="lg"
-          overflow="hidden"
-          backgroundColor={board.color || 'blue.400'}
-          shadow="2"
-          h="250px"
-          color="white"
-        >
-          <Box
-            textAlign="center"
-            fontWeight="bold"
-            letterSpacing="wide"
-            fontSize="md"
-            textTransform="uppercase"
-          >
-            {board.name}
-          </Box>
-        </Box>
+          board={board}
+          handleRemoveBoard={handleRemoveBoard}
+          handleEditBoard={handleEditBoard}
+        />
       ))}
-      <Button
-        m="3"
-        h="250px"
-        borderStyle="groove"
-        leftIcon={<PlusSquareIcon />}
-        variant="outline"
-        onClick={onOpen}
-      >
+      <Button m="3" leftIcon={<PlusSquareIcon />} variant="outline" onClick={onOpenCreate}>
         Add new board
       </Button>
       <AddBoardForm
         handleCreateBoard={handleCreateBoard}
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
+        isOpen={isOpenCreate}
+        onOpen={onOpenCreate}
+        onClose={onCloseCreate}
+      />
+      <EditBoardForm
+        currentBoard={currentBoard}
+        handleUpdateBoard={handleUpdateBoard}
+        isOpen={isOpenEdit}
+        onOpen={onOpenEdit}
+        onClose={onCloseEdit}
       />
     </Grid>
   )

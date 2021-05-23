@@ -84,9 +84,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
           </Box>
           <Box maxH={['55vh', '68vh']} overflowY="scroll">
             {tasks.map((task) => {
-              return group.taskIds.includes(task.id) ? (
-                <Tasks boardId={boardId} task={task} />
-              ) : null
+              return group.taskIds.includes(task.id) ? <Tasks key={task.id} task={task} /> : null
             })}
           </Box>
 
