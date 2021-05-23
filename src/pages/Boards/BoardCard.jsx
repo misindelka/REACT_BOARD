@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Button } from '@chakra-ui/react'
 
-export const BoardCard = ({ board, handleRemoveBoard }) => {
+export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
   return (
     <Box
       borderRadius="lg"
@@ -33,7 +33,9 @@ export const BoardCard = ({ board, handleRemoveBoard }) => {
         </Box>
       </Box>
       <Box m="3" display="flex" justifyContent="space-between">
-        <Button bg="none">EDIT</Button>
+        <Button bg="none" onClick={() => handleEditBoard(board)}>
+          EDIT
+        </Button>
         <Button bg="none" onClick={() => handleRemoveBoard(board.id)}>
           DELETE
         </Button>
