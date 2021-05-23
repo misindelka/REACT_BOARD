@@ -7,8 +7,6 @@ import { createTaskGroup, getBoard } from '../../utils/api'
 
 const Board = () => {
   const { id } = useParams()
-  const urlParams = new URLSearchParams(window.location.search)
-  const boardColor = urlParams.get('color')
 
   // const [status, setStatus] = React.useState('loading') ADD SPINNER
   const [board, setBoard] = React.useState({})
@@ -52,7 +50,7 @@ const Board = () => {
       </Text>
 
       <Stack direction="row">
-        <TaskGroups boardColor={boardColor} boardId={id} handleCreateGroup={handleCreateGroup} />
+        <TaskGroups boardColor={board.color} boardId={id} handleCreateGroup={handleCreateGroup} />
       </Stack>
     </Box>
   )

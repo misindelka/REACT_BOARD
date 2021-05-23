@@ -7,11 +7,12 @@ import { BoardCard } from './BoardCard'
 import { EditBoardForm } from './EditBoardFrom'
 
 const Boards = () => {
-  const [status, setStatus] = React.useState('loading')
+  const [status, setStatus] = React.useState('loadings')
   const [boards, setBoards] = React.useState([])
   const [currentBoard, setCurrentBoard] = React.useState('')
   const { isOpen: isOpenCreate, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure()
   const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure()
+  const toast = useToast()
 
   React.useEffect(() => {
     try {
@@ -24,7 +25,7 @@ const Boards = () => {
     } catch (e) {
       console.log(e)
     }
-  }, [boards])
+  }, [boards, status])
 
   const handleCreateBoard = (newBoard) => {
     if (newBoard === '') {
