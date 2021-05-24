@@ -68,7 +68,15 @@ export const EditBoardForm = ({ handleUpdateBoard, isOpen, onClose, currentBoard
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={handleSubmitForm} colorScheme="blue" mr={3}>
+          <Button
+            background={editedBoard.color}
+            onClick={handleSubmitForm}
+            colorScheme="blue"
+            mr={3}
+            _hover={{
+              background: editedBoard.color,
+            }}
+          >
             Update board
           </Button>
           <Button onClick={() => onClose()}>Cancel</Button>

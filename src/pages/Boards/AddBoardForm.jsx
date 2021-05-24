@@ -72,6 +72,9 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
             isDisabled={!newBoard.name}
             onClick={handleSubmitForm}
             background={newBoard.color}
+            _hover={{
+              background: newBoard.color,
+            }}
             mr={3}
             color="white"
           >

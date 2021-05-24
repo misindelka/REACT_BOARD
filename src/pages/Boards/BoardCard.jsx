@@ -15,6 +15,8 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
       m="3"
       pl="5"
       pr="5"
+      pt="6"
+      pb="1"
     >
       <EditIcon pt="3" w="4" h="10" float="left" bg="none" onClick={() => handleEditBoard(board)} />
       <DeleteIcon
@@ -44,7 +46,6 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
           {board.name}
         </Box>
       </Box>
-
       <Box />
     </Box>
   )
