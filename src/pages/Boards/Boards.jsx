@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 import * as React from 'react'
-import { Button, Center, Grid, Spinner, useToast, useDisclosure } from '@chakra-ui/react'
+import { Button, Center, Grid, Spinner, useDisclosure } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
 import { getBoards, createBoard, removeBoard, updateBoard } from '../../utils/api'
 import { AddBoardForm } from './AddBoardForm'
@@ -29,12 +30,7 @@ const Boards = () => {
 
   const handleCreateBoard = (newBoard) => {
     if (newBoard === '') {
-      toast({
-        title: 'You need to input the board name.',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-      })
+      console.log()
     } else {
       createBoard(newBoard.name, newBoard.color)
     }
