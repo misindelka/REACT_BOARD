@@ -19,7 +19,7 @@ const initialGroupValue = {
   boardId: null,
 }
 
-export const AddNewGroup = ({ handleCreateGroup, boardId, boardColor }) => {
+export const AddNewGroup = ({ handleCreateGroup, boardId, boardColor, hoverColor }) => {
   const [newGroup, setNewGroup] = React.useState(initialGroupValue)
 
   const handleAddNewGroup = (e) => {
@@ -31,6 +31,7 @@ export const AddNewGroup = ({ handleCreateGroup, boardId, boardColor }) => {
     handleCreateGroup(newGroup)
     setNewGroup(initialGroupValue)
   }
+
   return (
     <Box
       textColor="white"
@@ -53,6 +54,9 @@ export const AddNewGroup = ({ handleCreateGroup, boardId, boardColor }) => {
             mt="-2"
             w="100%"
             background={boardColor}
+            _hover={{
+              background: hoverColor,
+            }}
           >
             Add new group
           </Button>
@@ -77,6 +81,9 @@ export const AddNewGroup = ({ handleCreateGroup, boardId, boardColor }) => {
               mt="3"
               background={boardColor}
               color="white"
+              _hover={{
+                background: hoverColor,
+              }}
             >
               Add
             </Button>

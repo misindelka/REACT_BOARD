@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Button } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 
 export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
@@ -13,7 +13,18 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
       shadow="2"
       color="white"
       m="3"
+      pl="5"
+      pr="5"
     >
+      <EditIcon pt="3" w="4" h="10" float="left" bg="none" onClick={() => handleEditBoard(board)} />
+      <DeleteIcon
+        pt="3"
+        w="4"
+        h="10"
+        float="right"
+        bg="none"
+        onClick={() => handleRemoveBoard(board.id)}
+      />
       <Box
         display="flex"
         flexDirection="column"
@@ -33,14 +44,8 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
           {board.name}
         </Box>
       </Box>
-      <Box>
-        <Button float="left" bg="none" onClick={() => handleEditBoard(board)}>
-          <EditIcon />
-        </Button>
-        <Button float="right" bg="none" onClick={() => handleRemoveBoard(board.id)}>
-          <DeleteIcon />
-        </Button>
-      </Box>
+
+      <Box />
     </Box>
   )
 }

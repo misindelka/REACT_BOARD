@@ -18,6 +18,7 @@ export const EditGroupForm = ({
   currentGroupName,
   currentGroupId,
   handleEditNewGroup,
+  hoverColor,
 }) => {
   const [editedGroupName, setEditedGroupName] = React.useState(currentGroupName)
 
@@ -71,6 +72,9 @@ export const EditGroupForm = ({
             w="80%"
             mt="3"
             background={boardColor}
+            _hover={{
+              background: hoverColor,
+            }}
             color="white"
           >
             Edit

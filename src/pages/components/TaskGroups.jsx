@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
@@ -77,6 +78,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
     updateTaskGroup(taskGroupId, data)
   }
 
+  const hoverColor = boardColor?.replace('400', '500')
   return (
     <>
       {groups.map((group) => (
@@ -104,6 +106,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
             fontSize="2xl"
           >
             <EditGroupForm
+              hoverColor={hoverColor}
               currentGroupId={group.id}
               handleEditNewGroup={handleEditNewGroup}
               boardColor={boardColor}
@@ -137,6 +140,9 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               }}
               color="white"
               background={boardColor}
+              _hover={{
+                background: hoverColor,
+              }}
             >
               + Add new task
             </Button>
@@ -146,6 +152,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               onOpen={onOpenCreateTask}
               onClose={onCloseCreateTask}
               handleCreateTask={handleCreateTasks}
+              hoverColor={hoverColor}
             />
             <EditTaskForm
               boardColor={boardColor}
@@ -154,11 +161,13 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               onClose={onCloseEditTask}
               currentTask={currentTask}
               handleUpdateTask={handleUpdateTask}
+              hoverColor={hoverColor}
             />
           </Box>
         </Box>
       ))}
       <AddNewGroup
+        hoverColor={hoverColor}
         boardColor={boardColor}
         boardId={boardId}
         handleCreateGroup={handleCreateGroup}
