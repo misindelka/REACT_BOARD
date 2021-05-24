@@ -78,7 +78,7 @@ export const EditTaskForm = ({
             background={boardColor}
             mr={3}
           >
-            Add task
+            Edit
           </Button>
           <Button
             onClick={() => {
