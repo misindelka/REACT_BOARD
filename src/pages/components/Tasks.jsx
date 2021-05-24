@@ -7,7 +7,7 @@ import { removeTask } from '../../utils/api'
 // import { id } from 'date-fns/locale'
 
 // eslint-disable-next-line react/prop-types
-const Tasks = ({ task, boardId }) => {
+const Tasks = ({ task, boardId, handleEditTask }) => {
   return (
     <Box>
       <>
@@ -23,7 +23,7 @@ const Tasks = ({ task, boardId }) => {
         >
           <EditIcon
             onClick={() => {
-              console.log('hey')
+              handleEditTask(task)
             }}
             float="left"
             boxSize="1.3em"

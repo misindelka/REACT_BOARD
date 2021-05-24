@@ -71,7 +71,7 @@ export const EditBoardForm = ({ handleUpdateBoard, isOpen, onClose, currentBoard
           <Button onClick={handleSubmitForm} colorScheme="blue" mr={3}>
             Update board
           </Button>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={() => onClose()}>Cancel</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
