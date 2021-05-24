@@ -47,7 +47,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
     } catch (e) {
       console.log(e)
     }
-  }, [boardId])
+  }, [boardId, groups])
 
   React.useEffect(() => {
     try {
