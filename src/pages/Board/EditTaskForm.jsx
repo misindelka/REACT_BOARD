@@ -22,6 +22,7 @@ export const EditTaskForm = ({
   groupId,
   boardColor,
   currentTask,
+  hoverColor,
 }) => {
   const [editedTask, setEditedTask] = React.useState(currentTask)
 
@@ -77,6 +78,9 @@ export const EditTaskForm = ({
             color="white"
             background={boardColor}
             mr={3}
+            _hover={{
+              background: hoverColor,
+            }}
           >
             Edit
           </Button>

@@ -1,12 +1,21 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { getTaskGroups, createTask, getTasks, removeTaskGroup, updateTask } from '../../utils/api'
+import { DeleteIcon } from '@chakra-ui/icons'
+import {
+  getTaskGroups,
+  createTask,
+  getTasks,
+  removeTaskGroup,
+  updateTask,
+  updateTaskGroup,
+} from '../../utils/api'
 import Tasks from './Tasks'
 import { AddNewTask } from '../Board/AddNewTask'
 import { AddNewGroup } from '../Board/AddNewGroup'
 import { EditTaskForm } from '../Board/EditTaskForm'
+import { EditGroupForm } from '../Board/EditGroupForm'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
@@ -26,6 +35,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
     onOpen: onOpenEditTask,
     onClose: onCloseEditTask,
   } = useDisclosure()
+  const hoverColor = boardColor?.replace('400', '500')
 
   React.useEffect(() => {
     try {
@@ -65,6 +75,10 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
     updateTask(currentTask.id, data)
   }
 
+  const handleUpdateGroup = (editedGroup) => {
+    updateTaskGroup(editedGroup.id, editedGroup)
+  }
+
   return (
     <>
       {groups.map((group) => (
@@ -91,7 +105,13 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
             p="5"
             fontSize="2xl"
           >
-            <EditIcon float="left" w="4" h="8" />
+            <EditGroupForm
+              hoverColor={hoverColor}
+              currentGroup={group}
+              handleUpdateGroup={handleUpdateGroup}
+              boardColor={boardColor}
+              currentGroupName={group.name}
+            />
             {group.name}
             <DeleteIcon
               onClick={() => {
@@ -120,6 +140,9 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               }}
               color="white"
               background={boardColor}
+              _hover={{
+                background: hoverColor,
+              }}
             >
               + Add new task
             </Button>
@@ -129,6 +152,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               onOpen={onOpenCreateTask}
               onClose={onCloseCreateTask}
               handleCreateTask={handleCreateTasks}
+              hoverColor={hoverColor}
             />
             <EditTaskForm
               boardColor={boardColor}
@@ -137,11 +161,13 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               onClose={onCloseEditTask}
               currentTask={currentTask}
               handleUpdateTask={handleUpdateTask}
+              hoverColor={hoverColor}
             />
           </Box>
         </Box>
       ))}
       <AddNewGroup
+        hoverColor={hoverColor}
         boardColor={boardColor}
         boardId={boardId}
         handleCreateGroup={handleCreateGroup}

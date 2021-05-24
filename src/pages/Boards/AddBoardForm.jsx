@@ -63,6 +63,11 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
               <option value="blue.400">Blue</option>
               <option value="red.400">Red</option>
               <option value="green.400">Green</option>
+              <option value="pink.400">Pink</option>
+              <option value="purple.400">Purple</option>
+              <option value="yellow.400">Yellow</option>
+              <option value="cyan.400">Cyan</option>
+              <option value="gray.500">Gray</option>
             </Select>
           </FormControl>
         </ModalBody>
@@ -72,7 +77,11 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
             isDisabled={!newBoard.name}
             onClick={handleSubmitForm}
             background={newBoard.color}
+            _hover={{
+              background: newBoard.color,
+            }}
             mr={3}
+            color="white"
           >
             Create board
           </Button>
