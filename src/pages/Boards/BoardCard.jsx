@@ -2,6 +2,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Button } from '@chakra-ui/react'
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 
 export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
   return (
@@ -32,12 +33,12 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
           {board.name}
         </Box>
       </Box>
-      <Box m="3" display="flex" justifyContent="space-between">
-        <Button bg="none" onClick={() => handleEditBoard(board)}>
-          EDIT
+      <Box>
+        <Button float="left" bg="none" onClick={() => handleEditBoard(board)}>
+          <EditIcon />
         </Button>
-        <Button bg="none" onClick={() => handleRemoveBoard(board.id)}>
-          DELETE
+        <Button float="right" bg="none" onClick={() => handleRemoveBoard(board.id)}>
+          <DeleteIcon />
         </Button>
       </Box>
     </Box>

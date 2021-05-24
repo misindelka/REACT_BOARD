@@ -73,6 +73,7 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
             onClick={handleSubmitForm}
             background={newBoard.color}
             mr={3}
+            color="white"
           >
             Create board
           </Button>

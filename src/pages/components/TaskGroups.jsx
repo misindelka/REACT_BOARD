@@ -1,12 +1,20 @@
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { getTaskGroups, createTask, getTasks, removeTaskGroup, updateTask } from '../../utils/api'
+import { DeleteIcon } from '@chakra-ui/icons'
+import {
+  getTaskGroups,
+  createTask,
+  getTasks,
+  removeTaskGroup,
+  updateTask,
+  updateTaskGroup,
+} from '../../utils/api'
 import Tasks from './Tasks'
 import { AddNewTask } from '../Board/AddNewTask'
 import { AddNewGroup } from '../Board/AddNewGroup'
 import { EditTaskForm } from '../Board/EditTaskForm'
+import { EditGroupForm } from '../Board/EditGroupForm'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
@@ -65,6 +73,10 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
     updateTask(currentTask.id, data)
   }
 
+  const handleEditNewGroup = (taskGroupId, data) => {
+    updateTaskGroup(taskGroupId, data)
+  }
+
   return (
     <>
       {groups.map((group) => (
@@ -91,7 +103,12 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
             p="5"
             fontSize="2xl"
           >
-            <EditIcon float="left" w="4" h="8" />
+            <EditGroupForm
+              currentGroupId={group.id}
+              handleEditNewGroup={handleEditNewGroup}
+              boardColor={boardColor}
+              currentGroupName={group.name}
+            />
             {group.name}
             <DeleteIcon
               onClick={() => {
