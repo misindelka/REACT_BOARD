@@ -73,7 +73,7 @@ const Boards = () => {
       ))}
       <Button
         borderColor="blue"
-        p="7"
+        h="10vh"
         m="3"
         leftIcon={<PlusSquareIcon />}
         variant="outline"
