@@ -35,6 +35,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
     onOpen: onOpenEditTask,
     onClose: onCloseEditTask,
   } = useDisclosure()
+  const hoverColor = boardColor?.replace('400', '500')
 
   React.useEffect(() => {
     try {
@@ -74,11 +75,10 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
     updateTask(currentTask.id, data)
   }
 
-  const handleEditNewGroup = (taskGroupId, data) => {
-    updateTaskGroup(taskGroupId, data)
+  const handleUpdateGroup = (editedGroup) => {
+    updateTaskGroup(editedGroup.id, editedGroup)
   }
 
-  const hoverColor = boardColor?.replace('400', '500')
   return (
     <>
       {groups.map((group) => (
@@ -107,8 +107,8 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
           >
             <EditGroupForm
               hoverColor={hoverColor}
-              currentGroupId={group.id}
-              handleEditNewGroup={handleEditNewGroup}
+              currentGroup={group}
+              handleUpdateGroup={handleUpdateGroup}
               boardColor={boardColor}
               currentGroupName={group.name}
             />

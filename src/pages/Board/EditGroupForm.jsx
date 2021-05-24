@@ -13,25 +13,18 @@ import {
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
 
-export const EditGroupForm = ({
-  boardColor,
-  currentGroupName,
-  currentGroupId,
-  handleEditNewGroup,
-  hoverColor,
-}) => {
-  const [editedGroupName, setEditedGroupName] = React.useState(currentGroupName)
+export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hoverColor }) => {
+  const [editedGroup, setEditedGroup] = React.useState(currentGroup)
 
-  //   React.useEffect(() => {
-  //     setEditedTask(currentTask)
-  //   }, [currentTask])
+  const handleEditGroup = (e) => {
+    const { name, value } = e.target
+    setEditedGroup({ ...editedGroup, [name]: value })
+  }
 
-  //   const handleSubmitForm = (e) => {
-  //     e.preventDefault()
-  //     handleUpdateTask(editedTask, groupId)
-  //     onClose()
-  //     setEditedTask(currentTask)
-  //   }
+  const handleSubmitForm = (e) => {
+    e.preventDefault()
+    handleUpdateGroup(editedGroup)
+  }
 
   return (
     <Popover>
@@ -63,12 +56,12 @@ export const EditGroupForm = ({
             color="black"
             variant="flushed"
             placeholder="Group name here"
-            value={editedGroupName}
-            onChange={(e) => setEditedGroupName(e.target.value)}
+            value={editedGroup.name}
+            onChange={handleEditGroup}
           />
           <Button
-            isDisabled={!editedGroupName}
-            onClick={handleEditNewGroup(currentGroupId, { name: editedGroupName })}
+            isDisabled={!editedGroup.name}
+            onClick={handleSubmitForm}
             w="80%"
             mt="3"
             background={boardColor}
