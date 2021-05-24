@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import * as React from 'react'
-import { Button, Center, Grid, Spinner, useDisclosure } from '@chakra-ui/react'
+import { Button, Center, Grid, Spinner, useDisclosure, useToast } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
 import { getBoards, createBoard, removeBoard, updateBoard } from '../../utils/api'
 import { AddBoardForm } from './AddBoardForm'
