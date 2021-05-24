@@ -45,7 +45,7 @@ export const EditTaskForm = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add new task</ModalHeader>
+        <ModalHeader>Edit task</ModalHeader>
         <ModalCloseButton />
 
         <ModalBody pb={6}>
