@@ -2,10 +2,11 @@
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { getTaskGroups, createTask, getTasks, removeTaskGroup } from '../../utils/api'
+import { getTaskGroups, createTask, getTasks, removeTaskGroup, updateTask } from '../../utils/api'
 import Tasks from './Tasks'
 import { AddNewTask } from '../Board/AddNewTask'
 import { AddNewGroup } from '../Board/AddNewGroup'
+import { EditTaskForm } from '../Board/EditTaskForm'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
@@ -13,8 +14,18 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
   const [status, setStatus] = React.useState('loading')
   const [groups, setGroups] = React.useState([])
   const [tasks, setTasks] = React.useState([])
+  const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: isOpenCreateTask,
+    onOpen: onOpenCreateTask,
+    onClose: onCloseCreateTask,
+  } = useDisclosure()
+  const {
+    isOpen: isOpenEditTask,
+    onOpen: onOpenEditTask,
+    onClose: onCloseEditTask,
+  } = useDisclosure()
 
   React.useEffect(() => {
     try {
@@ -42,7 +53,16 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
 
   const handleCreateTasks = (newTask) => {
     createTask(boardId, currentGroupId, newTask)
-    onClose()
+    onCloseCreateTask()
+  }
+
+  const handleEditTask = (task) => {
+    setCurrentTask(task)
+    onOpenEditTask()
+  }
+
+  const handleUpdateTask = (data) => {
+    updateTask(currentTask.id, data)
   }
 
   return (
@@ -84,7 +104,9 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
           </Box>
           <Box maxH={['55vh', '68vh']} overflowY="scroll">
             {tasks.map((task) => {
-              return group.taskIds.includes(task.id) ? <Tasks key={task.id} task={task} /> : null
+              return group.taskIds.includes(task.id) ? (
+                <Tasks key={task.id} task={task} handleEditTask={handleEditTask} />
+              ) : null
             })}
           </Box>
 
@@ -93,7 +115,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               w="100%"
               textTransform="uppercase"
               onClick={() => {
-                onOpen()
+                onOpenCreateTask()
                 setCurrentGroupId(group.id)
               }}
               color="white"
@@ -103,10 +125,18 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
             </Button>
             <AddNewTask
               boardColor={boardColor}
-              isOpen={isOpen}
-              onOpen={onOpen}
-              onClose={onClose}
+              isOpen={isOpenCreateTask}
+              onOpen={onOpenCreateTask}
+              onClose={onCloseCreateTask}
               handleCreateTask={handleCreateTasks}
+            />
+            <EditTaskForm
+              boardColor={boardColor}
+              isOpen={isOpenEditTask}
+              onOpen={onOpenEditTask}
+              onClose={onCloseEditTask}
+              currentTask={currentTask}
+              handleUpdateTask={handleUpdateTask}
             />
           </Box>
         </Box>
