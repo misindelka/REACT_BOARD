@@ -71,7 +71,14 @@ const Boards = () => {
           handleEditBoard={handleEditBoard}
         />
       ))}
-      <Button m="3" leftIcon={<PlusSquareIcon />} variant="outline" onClick={onOpenCreate}>
+      <Button
+        borderColor="blue"
+        h="105px"
+        m="3"
+        leftIcon={<PlusSquareIcon />}
+        variant="outline"
+        onClick={onOpenCreate}
+      >
         Add new board
       </Button>
       <AddBoardForm
@@ -83,9 +90,9 @@ const Boards = () => {
       <EditBoardForm
         currentBoard={currentBoard}
         handleUpdateBoard={handleUpdateBoard}
-        isOpen={isOpenEdit}
-        onOpen={onOpenEdit}
-        onClose={onCloseEdit}
+        isOpenEdit={isOpenEdit}
+        onOpenEdit={onOpenEdit}
+        onCloseEdit={onCloseEdit}
       />
     </Grid>
   )

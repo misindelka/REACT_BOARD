@@ -15,7 +15,7 @@ import {
   Select,
 } from '@chakra-ui/react'
 
-export const EditBoardForm = ({ handleUpdateBoard, isOpen, onClose, currentBoard }) => {
+export const EditBoardForm = ({ handleUpdateBoard, isOpenEdit, onCloseEdit, currentBoard }) => {
   const [editedBoard, setEditedBoard] = React.useState(currentBoard)
 
   React.useEffect(() => {
@@ -31,11 +31,11 @@ export const EditBoardForm = ({ handleUpdateBoard, isOpen, onClose, currentBoard
     e.preventDefault()
     handleUpdateBoard(editedBoard)
     setEditedBoard(editedBoard)
-    onClose()
+    onCloseEdit()
   }
 
   return (
-    <Modal isOpen={isOpen} onCloseEdit={onClose}>
+    <Modal isOpen={isOpenEdit} onCloseEdit={onCloseEdit}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit board</ModalHeader>
@@ -63,15 +63,28 @@ export const EditBoardForm = ({ handleUpdateBoard, isOpen, onClose, currentBoard
               <option value="blue.400">Blue</option>
               <option value="red.400">Red</option>
               <option value="green.400">Green</option>
+              <option value="pink.400">Pink</option>
+              <option value="purple.400">Purple</option>
+              <option value="yellow.400">Yellow</option>
+              <option value="cyan.400">Cyan</option>
+              <option value="gray.500">Gray</option>
             </Select>
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={handleSubmitForm} colorScheme="blue" mr={3}>
+          <Button
+            background={editedBoard.color}
+            onClick={handleSubmitForm}
+            colorScheme="blue"
+            mr={3}
+            _hover={{
+              background: editedBoard.color,
+            }}
+          >
             Update board
           </Button>
-          <Button onClick={() => onClose()}>Cancel</Button>
+          <Button onClick={() => onCloseEdit()}>Cancel</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

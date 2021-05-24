@@ -20,7 +20,14 @@ const initialNewTaskValue = {
   content: '',
 }
 
-export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId, boardColor }) => {
+export const AddNewTask = ({
+  handleCreateTask,
+  isOpen,
+  onClose,
+  groupId,
+  boardColor,
+  hoverColor,
+}) => {
   const [newTask, setNewTask] = React.useState(initialNewTaskValue)
 
   const handleAddNewTask = (e) => {
@@ -71,6 +78,9 @@ export const AddNewTask = ({ handleCreateTask, isOpen, onClose, groupId, boardCo
             color="white"
             background={boardColor}
             mr={3}
+            _hover={{
+              background: hoverColor,
+            }}
           >
             Add task
           </Button>
