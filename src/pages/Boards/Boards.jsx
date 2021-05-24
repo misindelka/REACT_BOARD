@@ -73,7 +73,7 @@ const Boards = () => {
       ))}
       <Button
         borderColor="blue"
-        h="10vh"
+        h="105px"
         m="3"
         leftIcon={<PlusSquareIcon />}
         variant="outline"
@@ -90,9 +90,9 @@ const Boards = () => {
       <EditBoardForm
         currentBoard={currentBoard}
         handleUpdateBoard={handleUpdateBoard}
-        isOpen={isOpenEdit}
-        onOpen={onOpenEdit}
-        onClose={onCloseEdit}
+        isOpenEdit={isOpenEdit}
+        onOpenEdit={onOpenEdit}
+        onCloseEdit={onCloseEdit}
       />
     </Grid>
   )

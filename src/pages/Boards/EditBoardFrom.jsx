@@ -15,7 +15,7 @@ import {
   Select,
 } from '@chakra-ui/react'
 
-export const EditBoardForm = ({ handleUpdateBoard, isOpen, onClose, currentBoard }) => {
+export const EditBoardForm = ({ handleUpdateBoard, isOpenEdit, onCloseEdit, currentBoard }) => {
   const [editedBoard, setEditedBoard] = React.useState(currentBoard)
 
   React.useEffect(() => {
@@ -31,11 +31,11 @@ export const EditBoardForm = ({ handleUpdateBoard, isOpen, onClose, currentBoard
     e.preventDefault()
     handleUpdateBoard(editedBoard)
     setEditedBoard(editedBoard)
-    onClose()
+    onCloseEdit()
   }
 
   return (
-    <Modal isOpen={isOpen} onCloseEdit={onClose}>
+    <Modal isOpen={isOpenEdit} onCloseEdit={onCloseEdit}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit board</ModalHeader>
@@ -79,7 +79,7 @@ export const EditBoardForm = ({ handleUpdateBoard, isOpen, onClose, currentBoard
           >
             Update board
           </Button>
-          <Button onClick={() => onClose()}>Cancel</Button>
+          <Button onClick={() => onCloseEdit()}>Cancel</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
