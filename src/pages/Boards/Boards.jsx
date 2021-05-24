@@ -13,6 +13,7 @@ const Boards = () => {
   const [currentBoard, setCurrentBoard] = React.useState('')
   const { isOpen: isOpenCreate, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure()
   const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure()
+  // eslint-disable-next-line no-unused-vars
   const toast = useToast()
 
   React.useEffect(() => {
