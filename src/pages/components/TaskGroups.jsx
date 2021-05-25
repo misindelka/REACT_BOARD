@@ -3,25 +3,19 @@
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
-import {
-  getTaskGroups,
-  createTask,
-  getTasks,
-  removeTaskGroup,
-  updateTask,
-  updateTaskGroup,
-} from '../../utils/api'
+import { createTask, removeTaskGroup, updateTask, updateTaskGroup } from '../../utils/api'
+import { useGroups } from '../../hooks/useGroups'
 import Tasks from './Tasks'
 import { AddNewTask } from '../Board/AddNewTask'
 import { AddNewGroup } from '../Board/AddNewGroup'
 import { EditTaskForm } from '../Board/EditTaskForm'
 import { EditGroupForm } from '../Board/EditGroupForm'
+import { useTasks } from '../../hooks/useTask'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
   // const [status, setStatus] = React.useState('loading')
-  const [groups, setGroups] = React.useState([])
-  const [tasks, setTasks] = React.useState([])
+
   const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
   const {
@@ -35,30 +29,8 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
     onClose: onCloseEditTask,
   } = useDisclosure()
   const hoverColor = boardColor?.replace('400', '500')
-
-  React.useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await getTaskGroups(boardId)
-        setGroups(data)
-      }
-      fetchData()
-    } catch (e) {
-      console.log(e)
-    }
-  }, [boardId, groups])
-
-  React.useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await getTasks(boardId)
-        setTasks(data)
-      }
-      fetchData()
-    } catch (e) {
-      console.log(e)
-    }
-  }, [boardId, tasks])
+  const groups = useGroups(boardId)
+  const tasks = useTasks(boardId)
 
   const handleCreateTasks = (newTask) => {
     createTask(boardId, currentGroupId, newTask)
