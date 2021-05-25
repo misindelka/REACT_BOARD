@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import * as React from 'react'
 import {
@@ -10,11 +11,26 @@ import {
   PopoverCloseButton,
   PopoverHeader,
   PopoverBody,
+  Select,
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
+import { getBoards } from '../../utils/api'
 
 export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hoverColor }) => {
   const [editedGroup, setEditedGroup] = React.useState(currentGroup)
+  const [boards, setBoards] = React.useState()
+
+  React.useEffect(() => {
+    try {
+      const fetchData = async () => {
+        const data = await getBoards()
+        setBoards(data)
+      }
+      fetchData()
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
 
   const handleEditGroup = (e) => {
     const { name, value } = e.target
@@ -48,7 +64,7 @@ export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hov
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverHeader fontSize="md" color="blackAlpha.700">
-          Please input group name
+          Change group name
         </PopoverHeader>
         <PopoverBody>
           <Input
@@ -59,6 +75,22 @@ export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hov
             value={editedGroup.name}
             onChange={handleEditGroup}
           />
+          <PopoverHeader fontSize="md" color="blackAlpha.700">
+            Move to another board
+          </PopoverHeader>
+          <Select
+            name="boardId"
+            value={editedGroup.boardId}
+            onChange={handleEditGroup}
+            variant="flushed"
+            color="black"
+          >
+            {boards?.map((board) => (
+              <option key={board.id} value={board.id}>
+                {board.name}
+              </option>
+            ))}
+          </Select>
           <Button
             isDisabled={!editedGroup.name}
             onClick={handleSubmitForm}
