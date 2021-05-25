@@ -83,13 +83,13 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
       {groups.map((group) => (
         <Box
           key={group.id}
-          shadow="xl"
-          minH="17.5vh"
+          shadow={group.taskIds < 1 ? 'none' : 'base'}
+          h={`${group.taskIds * 21}vh`}
           maxH={['78vh', '83.3vh']}
           minW="350px"
-          borderWidth="1px"
+          borderWidth={group.taskIds < 1 ? '0px' : '1px'}
           borderRadius="lg"
-          backgroundColor="#F7FAFC"
+          backgroundColor={group.taskIds < 1 ? 'gray.100' : '#F7FAFC'}
           overflowY={['scroll', 'hidden']}
         >
           <Box
