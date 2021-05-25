@@ -78,6 +78,7 @@ const Boards = () => {
         leftIcon={<PlusSquareIcon />}
         variant="outline"
         onClick={onOpenCreate}
+        cursor="pointer"
       >
         Add new board
       </Button>

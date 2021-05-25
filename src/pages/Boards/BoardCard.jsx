@@ -18,6 +18,7 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
     >
       <Flex justifyContent="center" alignItems="center" h="100px">
         <EditIcon
+          cursor="pointer"
           pt="3"
           w="4"
           h="10"
@@ -31,6 +32,7 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
         </Text>
         <Spacer />
         <DeleteIcon
+          cursor="pointer"
           pt="3"
           w="4"
           h="10"

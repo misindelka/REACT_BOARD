@@ -22,6 +22,7 @@ const Tasks = ({ task, boardId, handleEditTask }) => {
           shadow="2"
         >
           <EditIcon
+            cursor="pointer"
             onClick={() => {
               handleEditTask(task)
             }}
@@ -30,6 +31,7 @@ const Tasks = ({ task, boardId, handleEditTask }) => {
             m="2"
           />
           <DeleteIcon
+            cursor="pointer"
             onClick={() => {
               removeTask(boardId, task.id)
             }}

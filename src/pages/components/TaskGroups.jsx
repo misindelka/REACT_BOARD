@@ -118,6 +118,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
             />
             {group.name}
             <DeleteIcon
+              cursor="pointer"
               onClick={() => {
                 removeTaskGroup(group.id)
               }}
