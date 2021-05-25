@@ -16,6 +16,7 @@ import { AddNewTask } from '../Board/AddNewTask'
 import { AddNewGroup } from '../Board/AddNewGroup'
 import { EditTaskForm } from '../Board/EditTaskForm'
 import { EditGroupForm } from '../Board/EditGroupForm'
+import { AlertDeleteGroup } from './AlertDeleteForm'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
@@ -24,6 +25,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
   const [tasks, setTasks] = React.useState([])
   const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
+  const [isOpen, setIsOpen] = React.useState(false)
   const {
     isOpen: isOpenCreateTask,
     onOpen: onOpenCreateTask,
@@ -120,7 +122,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
             <DeleteIcon
               cursor="pointer"
               onClick={() => {
-                removeTaskGroup(group.id)
+                setIsOpen(true)
               }}
               float="right"
               w="4"
@@ -167,6 +169,13 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               currentTask={currentTask}
               handleUpdateTask={handleUpdateTask}
               hoverColor={hoverColor}
+            />
+            <AlertDeleteGroup
+              groupName={group.name}
+              groupId={group.id}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              removeTaskGroup={removeTaskGroup}
             />
           </Box>
         </Box>

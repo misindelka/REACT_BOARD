@@ -4,10 +4,12 @@ import * as React from 'react'
 import { Text, Box } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { removeTask } from '../../utils/api'
+import { AlertDeleteTask } from './AlertDeleteForm'
 // import { id } from 'date-fns/locale'
 
 // eslint-disable-next-line react/prop-types
 const Tasks = ({ task, boardId, handleEditTask }) => {
+  const [isOpen, setIsOpen] = React.useState(false)
   return (
     <Box>
       <>
@@ -33,7 +35,7 @@ const Tasks = ({ task, boardId, handleEditTask }) => {
           <DeleteIcon
             cursor="pointer"
             onClick={() => {
-              removeTask(boardId, task.id)
+              setIsOpen(true)
             }}
             float="right"
             boxSize="1.3em"
@@ -50,6 +52,13 @@ const Tasks = ({ task, boardId, handleEditTask }) => {
           </Box>
         </Box>
       </>
+      <AlertDeleteTask
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        removeTask={removeTask}
+        boardId={boardId}
+        taskId={task.id}
+      />
     </Box>
   )
 }

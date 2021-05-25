@@ -3,8 +3,10 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Flex, Spacer, Text } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { AlertDeleteBoard } from '../components/AlertDeleteForm'
 
 export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
+  const [isOpen, setIsOpen] = React.useState(false)
   return (
     <Box
       borderRadius="lg"
@@ -38,9 +40,16 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
           h="10"
           float="right"
           bg="none"
-          onClick={() => handleRemoveBoard(board.id)}
+          onClick={() => setIsOpen(true)}
         />
       </Flex>
+      <AlertDeleteBoard
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        boardId={board.id}
+        boardName={board.name}
+        handleRemoveBoard={handleRemoveBoard}
+      />
       <Box />
     </Box>
   )
