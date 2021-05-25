@@ -19,8 +19,7 @@ import { EditGroupForm } from '../Board/EditGroupForm'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
-  // eslint-disable-next-line no-unused-vars
-  const [status, setStatus] = React.useState('loading')
+  // const [status, setStatus] = React.useState('loading')
   const [groups, setGroups] = React.useState([])
   const [tasks, setTasks] = React.useState([])
   const [currentTask, setCurrentTask] = React.useState('')

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Box } from '@chakra-ui/react'
+import { Box, Flex, Spacer, Text } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 
 export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
@@ -15,37 +15,30 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
       m="3"
       pl="5"
       pr="5"
-      pt="6"
-      pb="1"
+      as={Link}
+      to={`/boards/${board.id}`}
     >
-      <EditIcon pt="3" w="4" h="10" float="left" bg="none" onClick={() => handleEditBoard(board)} />
-      <DeleteIcon
-        pt="3"
-        w="4"
-        h="10"
-        float="right"
-        bg="none"
-        onClick={() => handleRemoveBoard(board.id)}
-      />
-      <Box
-        display="flex"
-        flexDirection="column"
-        p="4"
-        alignItems="center"
-        minH="10vh"
-        as={Link}
-        to={`/boards/${board.id}`}
-      >
-        <Box
-          textAlign="center"
-          fontWeight="bold"
-          letterSpacing="wide"
-          fontSize="md"
-          textTransform="uppercase"
-        >
-          {board.name}
-        </Box>
-      </Box>
+      <Flex justifyContent="center" alignItems="center" h="100px">
+        <EditIcon
+          pt="3"
+          w="4"
+          h="10"
+          float="left"
+          bg="none"
+          onClick={() => handleEditBoard(board)}
+        />
+        <Spacer />
+        <Text textAlign="center">{board.name}</Text>
+        <Spacer />
+        <DeleteIcon
+          pt="3"
+          w="4"
+          h="10"
+          float="right"
+          bg="none"
+          onClick={() => handleRemoveBoard(board.id)}
+        />
+      </Flex>
       <Box />
     </Box>
   )

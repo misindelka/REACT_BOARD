@@ -28,7 +28,7 @@ const Board = () => {
   }
 
   const handleEditTaskGroup = (taskGroupId) => {
-    updateTaskGroup(taskGroupId) // data
+    updateTaskGroup(taskGroupId)
   }
 
   return (
