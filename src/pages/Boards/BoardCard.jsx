@@ -15,8 +15,6 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
       m="3"
       pl="5"
       pr="5"
-      as={Link}
-      to={`/boards/${board.id}`}
     >
       <Flex justifyContent="center" alignItems="center" h="100px">
         <EditIcon
@@ -28,7 +26,9 @@ export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
           onClick={() => handleEditBoard(board)}
         />
         <Spacer />
-        <Text textAlign="center">{board.name}</Text>
+        <Text as={Link} to={`/boards/${board.id}`} textAlign="center">
+          {board.name}
+        </Text>
         <Spacer />
         <DeleteIcon
           pt="3"
