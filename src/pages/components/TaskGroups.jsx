@@ -84,7 +84,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
         <Box
           key={group.id}
           shadow={group.taskIds < 1 ? 'none' : 'base'}
-          h={`${group.taskIds * 23}vh`}
+          minH="17.5vh"
           maxH={['78vh', '83.3vh']}
           minW="350px"
           borderWidth={group.taskIds < 1 ? '0px' : '1px'}
