@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Box, Button, Center, Heading } from '@chakra-ui/react'
 import TextAnimation from 'react-animate-text'
 import { Link } from 'react-router-dom'
-import reactBg from '../assets/space.mp4'
+import reactBg from '../assets/space.jpg'
 
 const Dashboard = () => {
   return (
