@@ -37,7 +37,6 @@ export const AddNewTask = ({
     setNewTask({ ...newTask, [name]: value })
   }
 
-
   const handleSubmitForm = (e) => {
     e.preventDefault()
     handleCreateTask(newTask, groupId)

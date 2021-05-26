@@ -5,17 +5,18 @@ import { Box, Button, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
 import {
   createTask,
+  getTaskGroups,
+  getTasks,
   removeTaskGroup,
   updateTask,
   updateTaskGroup,
-  getTaskGroups,
-  getTasks,
 } from '../../../utils/api'
-import Tasks from './Task'
+import { Tasks } from './Task'
 import { AddNewTask } from '../Components/AddNewTask'
 import { AddNewGroup } from '../Components/AddNewGroup'
 import { EditTaskForm } from '../Components/EditTaskForm'
 import { EditGroupForm } from '../Components/EditGroupForm'
+import { AlertDeleteGroup } from './AlertDeleteForm'
 import { useFetch } from '../../../hooks/useFetch'
 
 // eslint-disable-next-line react/prop-types
@@ -23,6 +24,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
   // const [status, setStatus] = React.useState('loading')
   const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
+  const [isOpen, setIsOpen] = React.useState(false)
   const {
     isOpen: isOpenCreateTask,
     onOpen: onOpenCreateTask,
@@ -96,9 +98,9 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
             />
             {group.name}
             <DeleteIcon
+              cursor="pointer"
               onClick={() => {
-                removeTaskGroup(group.id)
-                fetchGroups()
+                setIsOpen(true)
               }}
               float="right"
               w="4"
@@ -108,7 +110,13 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
           <Box maxH={['55vh', '68vh']} overflowY="scroll">
             {tasks.map((task) => {
               return group.taskIds.includes(task.id) ? (
-                <Tasks key={task.id} task={task} handleEditTask={handleEditTask} />
+                <Tasks
+                  taskGroupId={group.id}
+                  boardId={boardId}
+                  key={task.id}
+                  task={task}
+                  handleEditTask={handleEditTask}
+                />
               ) : null
             })}
           </Box>
@@ -147,6 +155,13 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               currentTask={currentTask}
               handleUpdateTask={handleUpdateTask}
               hoverColor={hoverColor}
+            />
+            <AlertDeleteGroup
+              groupName={group.name}
+              groupId={group.id}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              removeTaskGroup={removeTaskGroup}
             />
           </Box>
         </Box>

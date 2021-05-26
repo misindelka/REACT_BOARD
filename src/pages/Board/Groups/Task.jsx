@@ -2,12 +2,17 @@
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Text, Box } from '@chakra-ui/react'
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { removeTask } from '../../../utils/api'
+import { CopyIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { createTask, removeTask } from '../../../utils/api'
+import { AlertDeleteTask } from './AlertDeleteForm'
 // import { id } from 'date-fns/locale'
 
 // eslint-disable-next-line react/prop-types
-const Tasks = ({ task, boardId, handleEditTask }) => {
+export const Tasks = ({ task, boardId, handleEditTask, taskGroupId }) => {
+  const handleCopyTask = () => {
+    createTask(boardId, taskGroupId, { ...task, id: null })
+  }
+  const [isOpen, setIsOpen] = React.useState(false)
   return (
     <Box>
       <>
@@ -22,6 +27,7 @@ const Tasks = ({ task, boardId, handleEditTask }) => {
           shadow="2"
         >
           <EditIcon
+            cursor="pointer"
             onClick={() => {
               handleEditTask(task)
             }}
@@ -29,9 +35,11 @@ const Tasks = ({ task, boardId, handleEditTask }) => {
             boxSize="1.3em"
             m="2"
           />
+          <CopyIcon onClick={handleCopyTask} cursor="pointer" boxSize="1.3em" m="2" />
           <DeleteIcon
+            cursor="pointer"
             onClick={() => {
-              removeTask(boardId, task.id)
+              setIsOpen(true)
             }}
             float="right"
             boxSize="1.3em"
@@ -48,8 +56,13 @@ const Tasks = ({ task, boardId, handleEditTask }) => {
           </Box>
         </Box>
       </>
+      <AlertDeleteTask
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        removeTask={removeTask}
+        boardId={boardId}
+        taskId={task.id}
+      />
     </Box>
   )
 }
-
-export default Tasks
