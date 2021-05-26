@@ -48,6 +48,11 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
 
   const handleUpdateGroup = (editedGroup) => {
     updateTaskGroup(editedGroup.id, editedGroup)
+    const filteredTasks = tasks.filter((i) => editedGroup.taskIds.includes(i.id))
+    const updatedTasksBoardIds = filteredTasks.reduce((acc, currVal) => {
+      return [...acc, { ...currVal, boardId: editedGroup.boardId }]
+    }, [])
+    updatedTasksBoardIds.map((i) => updateTask(i.id, i))
   }
 
   return (
