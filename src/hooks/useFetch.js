@@ -1,21 +1,22 @@
 /* eslint-disable prettier/prettier */
 import * as React from 'react'
-import { getBoards } from '../utils/api'
 
-export const useBoards = () => {
+export const useFetch = (method, arg) => {
 	const [data, setData] = React.useState([])
+
+	const fetchData = React.useCallback(async () => {
+		const response = await method(arg)
+		setData(response)
+	}, [method, arg])
+
 	React.useEffect(() => {
 		try {
-			const fetchData = async () => {
-				const response = await getBoards()
-				setData(response)
-			}
 			fetchData()
 		} catch (e) {
 			// eslint-disable-next-line no-console
 			console.log(e)
 		}
-	}, [])
+	}, [fetchData, arg])
 
-	return data
+	return { data, fetchData }
 }

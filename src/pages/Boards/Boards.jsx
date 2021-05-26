@@ -6,30 +6,18 @@ import { getBoards, createBoard, removeBoard, updateBoard } from '../../utils/ap
 import { AddBoardForm } from './components/AddBoardForm'
 import { BoardCard } from './components/BoardCard'
 import { EditBoardForm } from './components/EditBoardFrom'
-// import { useBoards } from '../../hooks/useBoards'
+import { useFetch } from '../../hooks/useFetch'
 
 const Boards = () => {
+  // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = React.useState('done')
-  const [boards, setBoards] = React.useState([])
   const [currentBoard, setCurrentBoard] = React.useState('')
   const { isOpen: isOpenCreate, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure()
   const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure()
   // eslint-disable-next-line no-unused-vars
   const toast = useToast()
 
-  const fetchData = React.useCallback(async () => {
-    const response = await getBoards()
-    setBoards(response)
-  }, [])
-
-  React.useEffect(() => {
-    try {
-      fetchData()
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(e)
-    }
-  }, [fetchData])
+  const { data: boards, fetchData } = useFetch(getBoards)
 
   const handleCreateBoard = (newBoard) => {
     if (newBoard === '') {
