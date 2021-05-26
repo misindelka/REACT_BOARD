@@ -19,7 +19,13 @@ const initialGroupValue = {
   boardId: null,
 }
 
-export const AddNewGroup = ({ handleCreateGroup, boardId, boardColor, hoverColor }) => {
+export const AddNewGroup = ({
+  handleCreateGroup,
+  boardId,
+  boardColor,
+  hoverColor,
+  fetchGroups,
+}) => {
   const [newGroup, setNewGroup] = React.useState(initialGroupValue)
 
   const handleAddNewGroup = (e) => {
@@ -30,6 +36,7 @@ export const AddNewGroup = ({ handleCreateGroup, boardId, boardColor, hoverColor
     e.preventDefault()
     handleCreateGroup(newGroup)
     setNewGroup(initialGroupValue)
+    fetchGroups()
   }
 
   return (

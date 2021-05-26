@@ -5,17 +5,16 @@ export const useFetch = (method, arg) => {
 	const [data, setData] = React.useState([])
 
 	const fetchData = React.useCallback(async () => {
-		const response = await method(arg)
-		setData(response)
+		try {
+			const response = await method(arg)
+			setData(response)
+		} catch (e) {
+			console.log(e)
+		}
 	}, [method, arg])
 
 	React.useEffect(() => {
-		try {
-			fetchData()
-		} catch (e) {
-			// eslint-disable-next-line no-console
-			console.log(e)
-		}
+		fetchData()
 	}, [fetchData, arg])
 
 	return { data, fetchData }
