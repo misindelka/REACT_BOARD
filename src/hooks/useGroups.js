@@ -12,6 +12,7 @@ export const useGroups = (boardId) => {
 			}
 			fetchData()
 		} catch (e) {
+			// eslint-disable-next-line no-console
 			console.log(e)
 		}
 	}, [boardId])
