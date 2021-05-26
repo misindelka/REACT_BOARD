@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { Text, Box } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { removeTask } from '../../utils/api'
+import { removeTask } from '../../../utils/api'
 // import { id } from 'date-fns/locale'
 
 // eslint-disable-next-line react/prop-types

@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Stack, Text } from '@chakra-ui/react'
-import { TaskGroups } from '../components/TaskGroups'
+import { TaskGroups } from './Groups/TaskGroups'
 import { createTaskGroup, getBoard, updateTaskGroup } from '../../utils/api'
 
 const Board = () => {

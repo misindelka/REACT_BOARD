@@ -14,7 +14,7 @@ export const useGroups = (boardId) => {
 		} catch (e) {
 			console.log(e)
 		}
-	}, [boardId, data])
+	}, [boardId])
 
 	return data
 }

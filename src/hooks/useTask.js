@@ -15,7 +15,7 @@ export const useTasks = (boardId) => {
 		} catch (e) {
 			console.log(e)
 		}
-	}, [boardId, data])
+	}, [boardId])
 
 	return data
 }

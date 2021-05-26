@@ -3,14 +3,14 @@
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
-import { createTask, removeTaskGroup, updateTask, updateTaskGroup } from '../../utils/api'
-import { useGroups } from '../../hooks/useGroups'
+import { createTask, removeTaskGroup, updateTask, updateTaskGroup } from '../../../utils/api'
+import { useGroups } from '../../../hooks/useGroups'
 import Tasks from './Tasks'
-import { AddNewTask } from '../Board/AddNewTask'
-import { AddNewGroup } from '../Board/AddNewGroup'
-import { EditTaskForm } from '../Board/EditTaskForm'
-import { EditGroupForm } from '../Board/EditGroupForm'
-import { useTasks } from '../../hooks/useTask'
+import { AddNewTask } from '../Components/AddNewTask'
+import { AddNewGroup } from '../Components/AddNewGroup'
+import { EditTaskForm } from '../Components/EditTaskForm'
+import { EditGroupForm } from '../Components/EditGroupForm'
+import { useTasks } from '../../../hooks/useTask'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
