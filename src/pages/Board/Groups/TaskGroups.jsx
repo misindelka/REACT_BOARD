@@ -4,24 +4,23 @@ import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
 import {
-  getTaskGroups,
   createTask,
-  getTasks,
   removeTaskGroup,
   updateTask,
   updateTaskGroup,
-} from '../../utils/api'
-import Tasks from './Tasks'
-import { AddNewTask } from '../Board/AddNewTask'
-import { AddNewGroup } from '../Board/AddNewGroup'
-import { EditTaskForm } from '../Board/EditTaskForm'
-import { EditGroupForm } from '../Board/EditGroupForm'
+  getTaskGroups,
+  getTasks,
+} from '../../../utils/api'
+import Tasks from './Task'
+import { AddNewTask } from '../Components/AddNewTask'
+import { AddNewGroup } from '../Components/AddNewGroup'
+import { EditTaskForm } from '../Components/EditTaskForm'
+import { EditGroupForm } from '../Components/EditGroupForm'
+import { useFetch } from '../../../hooks/useFetch'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
   // const [status, setStatus] = React.useState('loading')
-  const [groups, setGroups] = React.useState([])
-  const [tasks, setTasks] = React.useState([])
   const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
   const {
@@ -35,30 +34,8 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
     onClose: onCloseEditTask,
   } = useDisclosure()
   const hoverColor = boardColor?.replace('400', '500')
-
-  React.useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await getTaskGroups(boardId)
-        setGroups(data)
-      }
-      fetchData()
-    } catch (e) {
-      console.log(e)
-    }
-  }, [boardId, groups])
-
-  React.useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await getTasks(boardId)
-        setTasks(data)
-      }
-      fetchData()
-    } catch (e) {
-      console.log(e)
-    }
-  }, [boardId, tasks])
+  const { data: groups, fetchData: fetchGroups } = useFetch(getTaskGroups, boardId)
+  const { data: tasks, fetchData: fetchTasks } = useFetch(getTasks, boardId)
 
   const handleCreateTasks = (newTask) => {
     createTask(boardId, currentGroupId, newTask)
@@ -81,6 +58,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
       return [...acc, { ...currVal, boardId: editedGroup.boardId }]
     }, [])
     updatedTasksBoardIds.map((i) => updateTask(i.id, i))
+    fetchGroups()
   }
 
   return (
@@ -120,6 +98,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
             <DeleteIcon
               onClick={() => {
                 removeTaskGroup(group.id)
+                fetchGroups()
               }}
               float="right"
               w="4"
@@ -151,6 +130,8 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
               + Add new task
             </Button>
             <AddNewTask
+              fetchGroups={fetchGroups}
+              fetchTasks={fetchTasks}
               boardColor={boardColor}
               isOpen={isOpenCreateTask}
               onOpen={onOpenCreateTask}
@@ -171,6 +152,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
         </Box>
       ))}
       <AddNewGroup
+        fetchGroups={fetchGroups}
         hoverColor={hoverColor}
         boardColor={boardColor}
         boardId={boardId}
