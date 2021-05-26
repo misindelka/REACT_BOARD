@@ -3,31 +3,21 @@ import * as React from 'react'
 import { Button, Center, Grid, Spinner, useDisclosure, useToast } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
 import { getBoards, createBoard, removeBoard, updateBoard } from '../../utils/api'
-import { AddBoardForm } from './AddBoardForm'
-import { BoardCard } from './BoardCard'
-import { EditBoardForm } from './EditBoardFrom'
+import { AddBoardForm } from './components/AddBoardForm'
+import { BoardCard } from './components/BoardCard'
+import { EditBoardForm } from './components/EditBoardFrom'
+import { useFetch } from '../../hooks/useFetch'
 
 const Boards = () => {
-  const [status, setStatus] = React.useState('loadings')
-  const [boards, setBoards] = React.useState([])
+  // eslint-disable-next-line no-unused-vars
+  const [status, setStatus] = React.useState('done')
   const [currentBoard, setCurrentBoard] = React.useState('')
   const { isOpen: isOpenCreate, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure()
   const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure()
   // eslint-disable-next-line no-unused-vars
   const toast = useToast()
 
-  React.useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await getBoards()
-        setStatus('done')
-        setBoards(data)
-      }
-      fetchData()
-    } catch (e) {
-      console.log(e)
-    }
-  }, [boards, status])
+  const { data: boards, fetchData } = useFetch(getBoards)
 
   const handleCreateBoard = (newBoard) => {
     if (newBoard === '') {
@@ -35,10 +25,12 @@ const Boards = () => {
     } else {
       createBoard(newBoard.name, newBoard.color)
     }
+    fetchData()
   }
 
   const handleRemoveBoard = (boardId) => {
     removeBoard(boardId)
+    fetchData()
   }
 
   const handleEditBoard = (board) => {
@@ -48,6 +40,7 @@ const Boards = () => {
 
   const handleUpdateBoard = (data) => {
     updateBoard(currentBoard.id, data)
+    fetchData()
   }
 
   return status !== 'done' ? (

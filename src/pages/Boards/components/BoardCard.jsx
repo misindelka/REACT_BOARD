@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Flex, Spacer, Text } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { AlertDeleteBoard } from '../components/AlertDeleteForm'
+import { AlertDeleteBoard } from '../../Board/Groups/AlertDeleteForm'
 
 export const BoardCard = ({ board, handleRemoveBoard, handleEditBoard }) => {
   const [isOpen, setIsOpen] = React.useState(false)

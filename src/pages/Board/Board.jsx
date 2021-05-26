@@ -2,26 +2,14 @@
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Stack, Text } from '@chakra-ui/react'
-import { TaskGroups } from '../components/TaskGroups'
+import { TaskGroups } from './Groups/TaskGroups'
 import { createTaskGroup, getBoard, updateTaskGroup } from '../../utils/api'
+import { useFetch } from '../../hooks/useFetch'
 
 const Board = () => {
   const { id } = useParams()
 
-  // const [status, setStatus] = React.useState('loading') ADD SPINNER
-  const [board, setBoard] = React.useState({})
-
-  React.useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await getBoard(id)
-        setBoard(data)
-      }
-      fetchData()
-    } catch (e) {
-      console.log(e)
-    }
-  }, [id])
+  const { data: board } = useFetch(getBoard, id)
 
   const handleCreateGroup = (newGroup) => {
     createTaskGroup(newGroup.boardId, newGroup.name)

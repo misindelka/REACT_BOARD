@@ -3,12 +3,12 @@
 import * as React from 'react'
 import { Text, Box } from '@chakra-ui/react'
 import { CopyIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { createTask, removeTask } from '../../utils/api'
+import { createTask, removeTask } from '../../../utils/api'
 import { AlertDeleteTask } from './AlertDeleteForm'
 // import { id } from 'date-fns/locale'
 
 // eslint-disable-next-line react/prop-types
-const Tasks = ({ task, boardId, handleEditTask, taskGroupId }) => {
+export const Tasks = ({ task, boardId, handleEditTask, taskGroupId }) => {
   const handleCopyTask = () => {
     createTask(boardId, taskGroupId, { ...task, id: null })
   }
@@ -66,5 +66,3 @@ const Tasks = ({ task, boardId, handleEditTask, taskGroupId }) => {
     </Box>
   )
 }
-
-export default Tasks

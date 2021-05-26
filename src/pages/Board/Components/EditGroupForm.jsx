@@ -14,7 +14,7 @@ import {
   Select,
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
-import { getBoards } from '../../utils/api'
+import { getBoards } from '../../../utils/api'
 
 export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hoverColor }) => {
   const [editedGroup, setEditedGroup] = React.useState(currentGroup)
