@@ -6,9 +6,10 @@ import { getBoards, createBoard, removeBoard, updateBoard } from '../../utils/ap
 import { AddBoardForm } from './components/AddBoardForm'
 import { BoardCard } from './components/BoardCard'
 import { EditBoardForm } from './components/EditBoardFrom'
+// import { useBoards } from '../../hooks/useBoards'
 
 const Boards = () => {
-  const [status, setStatus] = React.useState('loadings')
+  const [status, setStatus] = React.useState('done')
   const [boards, setBoards] = React.useState([])
   const [currentBoard, setCurrentBoard] = React.useState('')
   const { isOpen: isOpenCreate, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure()
@@ -16,18 +17,19 @@ const Boards = () => {
   // eslint-disable-next-line no-unused-vars
   const toast = useToast()
 
+  const fetchData = React.useCallback(async () => {
+    const response = await getBoards()
+    setBoards(response)
+  }, [])
+
   React.useEffect(() => {
     try {
-      const fetchData = async () => {
-        const data = await getBoards()
-        setStatus('done')
-        setBoards(data)
-      }
       fetchData()
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log(e)
     }
-  }, [])
+  }, [fetchData])
 
   const handleCreateBoard = (newBoard) => {
     if (newBoard === '') {
@@ -35,10 +37,12 @@ const Boards = () => {
     } else {
       createBoard(newBoard.name, newBoard.color)
     }
+    fetchData()
   }
 
   const handleRemoveBoard = (boardId) => {
     removeBoard(boardId)
+    fetchData()
   }
 
   const handleEditBoard = (board) => {
@@ -48,6 +52,7 @@ const Boards = () => {
 
   const handleUpdateBoard = (data) => {
     updateBoard(currentBoard.id, data)
+    fetchData()
   }
 
   return status !== 'done' ? (
