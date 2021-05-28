@@ -36,7 +36,18 @@ export const AlertDeleteBoard = ({ isOpen, setIsOpen, boardId, boardName, handle
   )
 }
 
-export const AlertDeleteGroup = ({ isOpen, setIsOpen, removeTaskGroup, groupName, groupId }) => {
+export const AlertDeleteGroup = ({
+  isOpen,
+  setIsOpen,
+  removeTaskGroup,
+  groupName,
+  groupId,
+  fetchBoard,
+}) => {
+  const handleRemoveGroup = () => {
+    removeTaskGroup(groupId)
+    fetchBoard()
+  }
   return (
     <AlertDialog isOpen={isOpen}>
       <AlertDialogOverlay>
@@ -52,7 +63,7 @@ export const AlertDeleteGroup = ({ isOpen, setIsOpen, removeTaskGroup, groupName
 
           <AlertDialogFooter>
             <Button onClick={() => setIsOpen(false)}>Cancel</Button>
-            <Button onClick={() => removeTaskGroup(groupId)} colorScheme="red" ml={3}>
+            <Button onClick={handleRemoveGroup} colorScheme="red" ml={3}>
               Delete
             </Button>
           </AlertDialogFooter>
@@ -62,7 +73,12 @@ export const AlertDeleteGroup = ({ isOpen, setIsOpen, removeTaskGroup, groupName
   )
 }
 
-export const AlertDeleteTask = ({ isOpen, setIsOpen, removeTask, boardId, taskId }) => {
+export const AlertDeleteTask = ({ isOpen, setIsOpen, removeTask, boardId, taskId, fetchBoard }) => {
+  const handleRemoveTask = () => {
+    removeTask(boardId, taskId)
+    fetchBoard()
+  }
+
   return (
     <AlertDialog isOpen={isOpen}>
       <AlertDialogOverlay>
@@ -78,7 +94,7 @@ export const AlertDeleteTask = ({ isOpen, setIsOpen, removeTask, boardId, taskId
 
           <AlertDialogFooter>
             <Button onClick={() => setIsOpen(false)}>Cancel</Button>
-            <Button onClick={() => removeTask(boardId, taskId)} colorScheme="red" ml={3}>
+            <Button onClick={handleRemoveTask} colorScheme="red" ml={3}>
               Delete
             </Button>
           </AlertDialogFooter>

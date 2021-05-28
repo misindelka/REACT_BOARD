@@ -11,7 +11,7 @@ import {
   updateTask,
   updateTaskGroup,
 } from '../../../utils/api'
-import { Tasks } from './Task'
+import { Task } from './Task'
 import { AddNewTask } from '../Components/AddNewTask'
 import { AddNewGroup } from '../Components/AddNewGroup'
 import { EditTaskForm } from '../Components/EditTaskForm'
@@ -110,7 +110,7 @@ export const TaskGroups = ({ boardId, handleCreateGroup, boardColor }) => {
           <Box maxH={['55vh', '68vh']} overflowY="scroll">
             {tasks.map((task) => {
               return group.taskIds.includes(task.id) ? (
-                <Tasks
+                <Task
                   taskGroupId={group.id}
                   boardId={boardId}
                   key={task.id}

@@ -27,8 +27,7 @@ export const AddNewTask = ({
   groupId,
   boardColor,
   hoverColor,
-  fetchTasks,
-  fetchGroups,
+  fetchBoard,
 }) => {
   const [newTask, setNewTask] = React.useState(initialNewTaskValue)
 
@@ -42,8 +41,7 @@ export const AddNewTask = ({
     handleCreateTask(newTask, groupId)
     onClose()
     setNewTask(initialNewTaskValue)
-    fetchGroups()
-    fetchTasks()
+    fetchBoard()
   }
 
   return (
