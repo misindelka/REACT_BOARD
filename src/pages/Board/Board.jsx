@@ -1,7 +1,7 @@
-/* eslint-disable no-console */
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Stack, Text } from '@chakra-ui/react'
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { TaskGroups } from './Groups/TaskGroups'
 import { createTaskGroup, getBoard, updateTaskGroup } from '../../utils/api'
 import { useFetch } from '../../hooks/useFetch'
@@ -23,7 +23,6 @@ const Board = () => {
     fetchBoard()
   }
 
-  console.log()
   return (
     <Box
       overflowX="scroll"
@@ -46,26 +45,44 @@ const Board = () => {
         {board.name}
       </Text>
 
-      <Stack direction="row">
-        {board.taskGroups?.map((group) => (
-          <TaskGroups
-            hoverColor={hoverColor}
-            key={group.id}
-            group={group}
-            board={board}
-            fetchBoard={fetchBoard}
-            handleCreateGroup={handleCreateGroup}
-            handleEditGroup={handleEditGroup}
-          />
-        ))}
-        <AddNewGroup
-          handleCreateGroup={handleCreateGroup}
-          handleEditGroup={handleEditGroup}
-          hoverColor={hoverColor}
-          boardColor={board.color}
-          boardId={board.id}
-        />
-      </Stack>
+      <DragDropContext>
+        <Droppable droppableId="dropGroups">
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <Stack direction="row">
+                {board.taskGroups?.map((group, index) => (
+                  <Draggable key={group.id} draggableId={`${group.id}`} index={index}>
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <TaskGroups
+                          hoverColor={hoverColor}
+                          group={group}
+                          board={board}
+                          fetchBoard={fetchBoard}
+                          handleCreateGroup={handleCreateGroup}
+                          handleEditGroup={handleEditGroup}
+                        />
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                <AddNewGroup
+                  handleCreateGroup={handleCreateGroup}
+                  handleEditGroup={handleEditGroup}
+                  hoverColor={hoverColor}
+                  boardColor={board.color}
+                  boardId={board.id}
+                />
+              </Stack>
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </Box>
   )
 }

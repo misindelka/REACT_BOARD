@@ -26,8 +26,8 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
     onClose: onCloseEditTask,
   } = useDisclosure()
 
-  const handleCreateTask = (newTask) => {
-    createTask(board.id, currentGroupId, newTask)
+  const handleCreateTask = async (newTask) => {
+    await createTask(board.id, currentGroupId, newTask)
     onCloseCreateTask()
     fetchBoard()
   }
@@ -42,18 +42,20 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
     fetchBoard()
   }
 
-  const handleUpdateGroup = (editedGroup) => {
-    updateTaskGroup(editedGroup.id, editedGroup)
+  const handleUpdateGroup = async (editedGroup) => {
+    await updateTaskGroup(editedGroup.id, editedGroup)
     const filteredTasks = board.tasks.filter((i) => editedGroup.taskIds.includes(i.id))
+    console.log({ filteredTasks })
     const updatedTasksBoardIds = filteredTasks.reduce((acc, currVal) => {
       return [...acc, { ...currVal, boardId: editedGroup.boardId }]
     }, [])
+    console.log({ updatedTasksBoardIds })
     updatedTasksBoardIds.map((i) => updateTask(i.id, i))
     fetchBoard()
     console.log(editedGroup.boardId)
   }
 
-  const taskIds = group.taskIds.map((i) => i)
+  // const taskIds = group.taskIds.map((i) => i)
 
   return (
     <>
@@ -101,7 +103,8 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
         <Box maxH={['55vh', '68vh']} overflowY="scroll">
           {board.tasks?.map((task) => (
             <Task
-              taskIds={taskIds}
+              fetchBoard={fetchBoard}
+              taskIds={group.taskIds}
               taskGroupId={group.id}
               boardId={board.id}
               key={task.id}
@@ -128,7 +131,6 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
             + Add new task
           </Button>
           <AddNewTask
-            fetchBoard={fetchBoard}
             boardColor={board.color}
             isOpen={isOpenCreateTask}
             onOpen={onOpenCreateTask}
