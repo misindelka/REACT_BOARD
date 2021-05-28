@@ -17,7 +17,12 @@ const Board = () => {
     fetchBoard()
   }
 
-  const handleOnDragEnd = () => {}
+  const handleOnDragEnd = (result) => {
+    // update group id
+    // update task group id
+    console.log(result.source.index)
+    console.log(result.destination.index)
+  }
   const handleEditGroup = async (taskGroupId) => {
     await updateTaskGroup(taskGroupId)
     fetchBoard()
@@ -43,8 +48,8 @@ const Board = () => {
       >
         {board.name}
       </Text>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="dropGroups">
+      <DragDropContext direction="vertical" onDragEnd={handleOnDragEnd}>
+        <Droppable direction="horizontal" droppableId="dropGroups">
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               <Stack direction="row">
@@ -68,6 +73,7 @@ const Board = () => {
                     )}
                   </Draggable>
                 ))}
+                {provided.placeholder}
                 <AddNewGroup
                   handleCreateGroup={handleCreateGroup}
                   handleEditGroup={handleEditGroup}

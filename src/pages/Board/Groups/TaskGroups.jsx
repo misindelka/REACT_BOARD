@@ -1,8 +1,10 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { createTask, removeTaskGroup, updateTask, updateTaskGroup } from '../../../utils/api'
 import { Task } from './Task'
 import { AddNewTask } from '../Components/AddNewTask'
@@ -97,19 +99,38 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
             h="8"
           />
         </Box>
-        <Box maxH={['55vh', '68vh']} overflowY="scroll">
-          {board.tasks?.map((task) => (
-            <Task
-              taskIds={taskIds}
-              taskGroupId={group.id}
-              boardId={board.id}
-              key={task.id}
-              task={task}
-              handleEditTask={handleEditTask}
-              fetchBoard={fetchBoard}
-            />
-          ))}
-        </Box>
+        <DragDropContext>
+          <Droppable droppableId="dropTasks">
+            {(provided) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                <Box maxH={['55vh', '68vh']} overflowY="scroll">
+                  {board.tasks?.map((task, index) => (
+                    <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <Task
+                            taskIds={taskIds}
+                            taskGroupId={group.id}
+                            boardId={board.id}
+                            key={task.id}
+                            task={task}
+                            handleEditTask={handleEditTask}
+                            fetchBoard={fetchBoard}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </Box>
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
 
         <Box m="2">
           <Button
