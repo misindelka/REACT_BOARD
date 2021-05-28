@@ -72,8 +72,8 @@ import { AlertDeleteTask } from './AlertDeleteForm'
 
 // eslint-disable-next-line react/prop-types
 export const Task = ({ task, boardId, handleEditTask, taskGroupId, fetchBoard, taskIds }) => {
-  const handleCopyTask = () => {
-    createTask(boardId, taskGroupId, { ...task, id: null })
+  const handleCopyTask = async () => {
+    await createTask(boardId, taskGroupId, { ...task, id: null })
     fetchBoard()
   }
   const [isOpen, setIsOpen] = React.useState(false)

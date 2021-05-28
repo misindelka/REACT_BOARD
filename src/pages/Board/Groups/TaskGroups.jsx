@@ -52,10 +52,8 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
     console.log({ updatedTasksBoardIds })
     updatedTasksBoardIds.map((i) => updateTask(i.id, i))
     fetchBoard()
-    console.log(editedGroup.boardId)
+    console.log(parseFloat(editedGroup.boardId))
   }
-
-  // const taskIds = group.taskIds.map((i) => i)
 
   return (
     <>
