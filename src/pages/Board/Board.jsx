@@ -3,22 +3,28 @@ import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Stack, Text } from '@chakra-ui/react'
 import { TaskGroups } from './Groups/TaskGroups'
+import { Groups } from './Groups/groups'
 import { createTaskGroup, getBoard, updateTaskGroup } from '../../utils/api'
 import { useFetch } from '../../hooks/useFetch'
+import { AddNewGroup } from './Components/AddNewGroup'
 
 const Board = () => {
   const { id } = useParams()
 
-  const { data: board } = useFetch(getBoard, id)
+  const { data: board, fetchData: fetchBoard } = useFetch(getBoard, id)
+  const hoverColor = board.color?.replace('400', '500')
 
   const handleCreateGroup = (newGroup) => {
     createTaskGroup(newGroup.boardId, newGroup.name)
+    fetchBoard()
   }
 
-  const handleEditTaskGroup = (taskGroupId) => {
+  const handleEditGroup = (taskGroupId) => {
     updateTaskGroup(taskGroupId)
+    fetchBoard()
   }
 
+  console.log()
   return (
     <Box
       overflowX="scroll"
@@ -42,11 +48,29 @@ const Board = () => {
       </Text>
 
       <Stack direction="row">
-        <TaskGroups
+        {/* <TaskGroups
           handleEditTaskGroup={handleEditTaskGroup}
           boardColor={board.color}
           boardId={id}
           handleCreateGroup={handleCreateGroup}
+        /> */}
+        {board.taskGroups?.map((group) => (
+          <Groups
+            hoverColor={hoverColor}
+            key={group.id}
+            group={group}
+            board={board}
+            fetchBoard={fetchBoard}
+            handleCreateGroup={handleCreateGroup}
+            handleEditGroup={handleEditGroup}
+          />
+        ))}
+        <AddNewGroup
+          handleCreateGroup={handleCreateGroup}
+          handleEditGroup={handleEditGroup}
+          hoverColor={hoverColor}
+          boardColor={board.color}
+          boardId={board.id}
         />
       </Stack>
     </Box>
