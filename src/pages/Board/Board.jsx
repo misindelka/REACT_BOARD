@@ -3,7 +3,6 @@ import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Stack, Text } from '@chakra-ui/react'
 import { TaskGroups } from './Groups/TaskGroups'
-import { Groups } from './Groups/groups'
 import { createTaskGroup, getBoard, updateTaskGroup } from '../../utils/api'
 import { useFetch } from '../../hooks/useFetch'
 import { AddNewGroup } from './Components/AddNewGroup'
@@ -48,14 +47,8 @@ const Board = () => {
       </Text>
 
       <Stack direction="row">
-        {/* <TaskGroups
-          handleEditTaskGroup={handleEditTaskGroup}
-          boardColor={board.color}
-          boardId={id}
-          handleCreateGroup={handleCreateGroup}
-        /> */}
         {board.taskGroups?.map((group) => (
-          <Groups
+          <TaskGroups
             hoverColor={hoverColor}
             key={group.id}
             group={group}
