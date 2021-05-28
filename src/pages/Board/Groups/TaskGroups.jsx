@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
-import { DeleteIcon } from '@chakra-ui/icons'
+import { DeleteIcon, DragHandleIcon } from '@chakra-ui/icons'
 import { createTask, removeTaskGroup, updateTask, updateTaskGroup } from '../../../utils/api'
 import { Task } from './Task'
 import { AddNewTask } from '../Components/AddNewTask'
@@ -65,9 +65,10 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
         minW="350px"
         borderWidth={group.taskIds < 1 ? '0px' : '1px'}
         borderRadius="lg"
-        backgroundColor={group.taskIds < 1 ? 'gray.100' : '#F7FAFC'}
+        backgroundColor={group.taskIds < 1 ? 'gray.100' : 'red'}
         overflowY={['scroll', 'hidden']}
       >
+        <DragHandleIcon />
         <Box
           m="2"
           backgroundColor={board.color}
@@ -107,6 +108,7 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
               key={task.id}
               task={task}
               handleEditTask={handleEditTask}
+              fetchBoard={fetchBoard}
             />
           ))}
         </Box>
