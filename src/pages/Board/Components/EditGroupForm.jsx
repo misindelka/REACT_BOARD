@@ -15,26 +15,15 @@ import {
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
 import { getBoards } from '../../../utils/api'
+import { useFetch } from '../../../hooks/useFetch'
 
 export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hoverColor }) => {
   const [editedGroup, setEditedGroup] = React.useState(currentGroup)
-  const [boards, setBoards] = React.useState()
-
-  React.useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await getBoards()
-        setBoards(data)
-      }
-      fetchData()
-    } catch (e) {
-      console.log(e)
-    }
-  }, [])
+  const { data: boards } = useFetch(getBoards)
 
   const handleEditGroup = (e) => {
     const { name, value } = e.target
-    setEditedGroup({ ...editedGroup, [name]: value })
+    setEditedGroup({ ...editedGroup, [name]: editedGroup.boardId ? parseFloat(value) : value })
   }
 
   const handleSubmitForm = (e) => {

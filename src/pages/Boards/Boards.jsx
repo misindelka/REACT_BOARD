@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import * as React from 'react'
-import { Button, Center, Grid, Spinner, useDisclosure, useToast } from '@chakra-ui/react'
+import { Button, Center, Grid, Spinner, useDisclosure } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
 import { getBoards, createBoard, removeBoard, updateBoard } from '../../utils/api'
 import { AddBoardForm } from './components/AddBoardForm'
@@ -14,27 +14,25 @@ const Boards = () => {
   const [currentBoard, setCurrentBoard] = React.useState('')
   const { isOpen: isOpenCreate, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure()
   const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure()
-  // eslint-disable-next-line no-unused-vars
-  const toast = useToast()
 
   const { data: boards, fetchData } = useFetch(getBoards)
 
-  const handleCreateBoard = (newBoard) => {
+  const handleCreateBoard = async (newBoard) => {
     if (newBoard === '') {
       console.log()
     } else {
-      createBoard(newBoard.name, newBoard.color)
+      await createBoard(newBoard.name, newBoard.color)
     }
     fetchData()
   }
 
-  const handleRemoveBoard = (boardId) => {
-    removeBoard(boardId)
+  const handleRemoveBoard = async (boardId) => {
+    await removeBoard(boardId)
     fetchData()
   }
 
-  const handleEditBoard = (board) => {
-    setCurrentBoard(board)
+  const handleEditBoard = async (board) => {
+    await setCurrentBoard(board)
     onOpenEdit()
   }
 

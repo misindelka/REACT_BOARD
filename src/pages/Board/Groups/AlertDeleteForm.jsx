@@ -44,8 +44,8 @@ export const AlertDeleteGroup = ({
   groupId,
   fetchBoard,
 }) => {
-  const handleRemoveGroup = () => {
-    removeTaskGroup(groupId)
+  const handleRemoveGroup = async () => {
+    await removeTaskGroup(groupId)
     fetchBoard()
   }
   return (
@@ -74,8 +74,8 @@ export const AlertDeleteGroup = ({
 }
 
 export const AlertDeleteTask = ({ isOpen, setIsOpen, removeTask, boardId, taskId, fetchBoard }) => {
-  const handleRemoveTask = () => {
-    removeTask(boardId, taskId)
+  const handleRemoveTask = async () => {
+    await removeTask(boardId, taskId)
     fetchBoard()
   }
 

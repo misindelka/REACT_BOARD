@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
-import { DeleteIcon, DragHandleIcon } from '@chakra-ui/icons'
+import { DeleteIcon } from '@chakra-ui/icons'
 import { createTask, removeTaskGroup, updateTask, updateTaskGroup } from '../../../utils/api'
 import { Task } from './Task'
 import { AddNewTask } from '../Components/AddNewTask'
@@ -26,8 +26,8 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
     onClose: onCloseEditTask,
   } = useDisclosure()
 
-  const handleCreateTask = (newTask) => {
-    createTask(board.id, currentGroupId, newTask)
+  const handleCreateTask = async (newTask) => {
+    await createTask(board.id, currentGroupId, newTask)
     onCloseCreateTask()
     fetchBoard()
   }
@@ -42,15 +42,14 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
     fetchBoard()
   }
 
-  const handleUpdateGroup = (editedGroup) => {
-    updateTaskGroup(editedGroup.id, editedGroup)
+  const handleUpdateGroup = async (editedGroup) => {
+    await updateTaskGroup(editedGroup.id, editedGroup)
     const filteredTasks = board.tasks.filter((i) => editedGroup.taskIds.includes(i.id))
     const updatedTasksBoardIds = filteredTasks.reduce((acc, currVal) => {
       return [...acc, { ...currVal, boardId: editedGroup.boardId }]
     }, [])
     updatedTasksBoardIds.map((i) => updateTask(i.id, i))
     fetchBoard()
-    console.log(editedGroup.boardId)
   }
 
   const taskIds = group.taskIds.map((i) => i)
@@ -65,10 +64,9 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
         minW="350px"
         borderWidth={group.taskIds < 1 ? '0px' : '1px'}
         borderRadius="lg"
-        backgroundColor={group.taskIds < 1 ? 'gray.100' : 'red'}
+        backgroundColor={group.taskIds < 1 ? 'gray.100' : 'white'}
         overflowY={['scroll', 'hidden']}
       >
-        <DragHandleIcon />
         <Box
           m="2"
           backgroundColor={board.color}
