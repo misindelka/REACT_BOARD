@@ -45,17 +45,14 @@ const Board = () => {
       </Text>
 
       <Stack direction="row">
-        {board.taskGroups?.map((group) => (
-          <TaskGroups
-            hoverColor={hoverColor}
-            key={group.id}
-            group={group}
-            board={board}
-            fetchBoard={fetchBoard}
-            handleCreateGroup={handleCreateGroup}
-            handleEditGroup={handleEditGroup}
-          />
-        ))}
+        <TaskGroups
+          hoverColor={hoverColor}
+          board={board}
+          fetchBoard={fetchBoard}
+          handleCreateGroup={handleCreateGroup}
+          handleEditGroup={handleEditGroup}
+        />
+
         <AddNewGroup
           handleCreateGroup={handleCreateGroup}
           handleEditGroup={handleEditGroup}
