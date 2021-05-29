@@ -33,7 +33,6 @@ export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hov
     e.preventDefault()
     handleUpdateGroup(editedGroup)
   }
-  console.log(editedGroup)
 
   return (
     <Popover>
