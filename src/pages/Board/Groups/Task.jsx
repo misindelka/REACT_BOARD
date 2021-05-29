@@ -3,8 +3,8 @@
 import * as React from 'react'
 import { Text, Box } from '@chakra-ui/react'
 import { CopyIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { createTask, removeTask } from '../../../../utils/api'
-import { AlertDeleteTask } from '../AlertDeleteForm'
+import { createTask, removeTask } from '../../../utils/api'
+import { AlertDeleteTask } from './AlertDeleteForm'
 // import { id } from 'date-fns/locale'
 
 // const Task = React.forwardRef(({ task, boardId, handleEditTask, taskGroupId, fetchBoard, taskIds }, ref) => {

@@ -1,6 +1,8 @@
+/* eslint-disable no-shadow */
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Stack, Text } from '@chakra-ui/react'
+// import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { TaskGroups } from './Groups/TaskGroups'
 import { createTaskGroup, getBoard, updateTaskGroup } from '../../utils/api'
 import { useFetch } from '../../hooks/useFetch'
@@ -21,6 +23,8 @@ const Board = () => {
     updateTaskGroup(taskGroupId)
     fetchBoard()
   }
+
+  // const onDragEnd = (result) => {}
 
   return (
     <Box
@@ -45,14 +49,17 @@ const Board = () => {
       </Text>
 
       <Stack direction="row">
-        <TaskGroups
-          hoverColor={hoverColor}
-          board={board}
-          fetchBoard={fetchBoard}
-          handleCreateGroup={handleCreateGroup}
-          handleEditGroup={handleEditGroup}
-        />
-
+        {board.taskGroups?.map((group) => (
+          <TaskGroups
+            key={group.id}
+            hoverColor={hoverColor}
+            group={group}
+            board={board}
+            fetchBoard={fetchBoard}
+            handleCreateGroup={handleCreateGroup}
+            handleEditGroup={handleEditGroup}
+          />
+        ))}
         <AddNewGroup
           handleCreateGroup={handleCreateGroup}
           handleEditGroup={handleEditGroup}
