@@ -57,14 +57,30 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor, setBoard }) =
   }
 
   const handleOnDragEnd = async (result) => {
+    // if (result.destination) {
+    //   return
+    // }
+
+    // if (ok
+    //   result.destination.droppableId === result.source.droppableId &&
+    //   result.destination.index === result.source.index
+    // ) {
+    //   return
+    // }
+
+    //   const start = board.taskGroups[result.source.droppableId]
+    //   const finish = board.taskGrpups[result.destination.droppableId]
+
+    //  if (start === finish) {}
+
     const items = [...group.taskIds]
     const [reorderedId] = items.splice(result.source.index, 1)
     items.splice(result.destination.index, 0, reorderedId)
 
     await updateTaskGroup(group.id, { ...group, taskIds: items })
     fetchBoard()
-    console.log('items', items)
-    console.log('taskIds', group.taskIds)
+    // console.log('items', items)
+    // console.log('taskIds', group.taskIds)
   }
 
   return (

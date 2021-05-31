@@ -26,14 +26,14 @@ const Board = () => {
 
   const handleOnDragEnd = (result) => {
     const items = Array.from(board.taskGroups)
-    const [reorderedId] = items.splice(result.source.index, 1)
-    items.splice(result.destination.index, 0, reorderedId)
+    const [reorderedGroup] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0, reorderedGroup)
 
-    // updateTaskGroups(...board, { taskGroups: items })
+    updateTaskGroups(items)
 
-    // console.log('items', items)
+    console.log('items', items)
+    console.log('board', board.taskGroups)
   }
-  // console.log('board', board.taskGroups)
 
   return (
     <Box
