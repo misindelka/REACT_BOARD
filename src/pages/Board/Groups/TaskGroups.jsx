@@ -13,7 +13,7 @@ import { EditGroupForm } from '../Components/EditGroupForm'
 import { AlertDeleteGroup } from './AlertDeleteForm'
 
 // eslint-disable-next-line react/prop-types
-export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
+export const TaskGroups = ({ group, board, fetchBoard, hoverColor, setBoard }) => {
   const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
   const [isOpen, setIsOpen] = React.useState(false)
@@ -63,10 +63,9 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
 
     await updateTaskGroup(group.id, { ...group, taskIds: items })
     fetchBoard()
-
     console.log('items', items)
+    console.log('taskIds', group.taskIds)
   }
-  console.log('group', group)
 
   return (
     <>
