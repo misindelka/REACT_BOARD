@@ -46,18 +46,14 @@ const Board = () => {
   return (
     <>
       <Box
-        ov
         overflowX="scroll"
         overflowY={['scroll', 'hidden']}
         minW="100vw"
         bg={useColorModeValue('gray.100', '#1A202C')}
-        p="2"
+        p="4"
         pb="0"
-        maxH="93vh"
+        h="90vh"
       >
-        {/* <Text pl="6" fontSize="30px" color={board.color}>
-          {board.name}
-        </Text> */}
         {board.taskGroups?.length < 1 ? (
           <FirstGroupForm
             color={board.color}

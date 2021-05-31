@@ -12,12 +12,19 @@ import {
   PopoverHeader,
   PopoverBody,
   Select,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
 import { getBoards } from '../../../utils/api'
 import { useFetch } from '../../../hooks/useFetch'
 
-export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hoverColor }) => {
+export const EditGroupForm = ({
+  handleShowArchived,
+  boardColor,
+  currentGroup,
+  handleUpdateGroup,
+  hoverColor,
+}) => {
   const [editedGroup, setEditedGroup] = React.useState(currentGroup)
   const { data: boards } = useFetch(getBoards)
 
@@ -58,7 +65,7 @@ export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hov
         <PopoverBody>
           <Input
             name="name"
-            color="black"
+            color={useColorModeValue('black', 'white')}
             variant="flushed"
             placeholder="Group name here"
             value={editedGroup.name}
@@ -72,7 +79,7 @@ export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hov
             value={editedGroup.boardId}
             onChange={handleEditGroup}
             variant="flushed"
-            color="black"
+            color={useColorModeValue('black', 'white')}
           >
             {boards?.map((board) => (
               <option key={board.id} value={board.id}>
@@ -92,6 +99,19 @@ export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hov
             color="white"
           >
             Edit
+          </Button>
+          <Button
+            isDisabled={!editedGroup.name}
+            onClick={handleShowArchived}
+            w="80%"
+            mt="3"
+            background={boardColor}
+            _hover={{
+              background: hoverColor,
+            }}
+            color="white"
+          >
+            Show archived cards
           </Button>
         </PopoverBody>
       </PopoverContent>

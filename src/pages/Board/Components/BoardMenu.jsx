@@ -16,15 +16,15 @@ import {
 } from '@chakra-ui/react'
 
 import { ChevronDownIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
-import { getBoards, updateBoard } from '../../../utils/api'
+import { getBoard, updateBoard } from '../../../utils/api'
 import { useFetch } from '../../../hooks/useFetch'
 
 export const BoardMenu = ({ setIsOpen, handleEditBoard, board }) => {
   const [boardMember, setBoardMember] = React.useState('')
-  const { fetchData: fetchBoards } = useFetch(getBoards)
+  const { fetchData: fetchBoard } = useFetch(getBoard)
   const handleAddBoardMember = async () => {
     await updateBoard(board.id, { ...board, members: [...board.members, boardMember] })
-    fetchBoards()
+    fetchBoard(board.id)
   }
   return (
     <Popover>
