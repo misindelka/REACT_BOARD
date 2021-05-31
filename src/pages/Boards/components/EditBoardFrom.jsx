@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react'
-
+import { CirclePicker } from 'react-color'
 import {
   Button,
   FormControl,
@@ -12,10 +12,16 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
 } from '@chakra-ui/react'
 
-export const EditBoardForm = ({ handleUpdateBoard, isOpenEdit, onCloseEdit, currentBoard }) => {
+export const EditBoardForm = ({
+  handleUpdateBoard,
+  isOpenEdit,
+  onCloseEdit,
+  currentBoard,
+  setBoardColor,
+  boardColor,
+}) => {
   const [editedBoard, setEditedBoard] = React.useState(currentBoard)
 
   React.useEffect(() => {
@@ -29,13 +35,13 @@ export const EditBoardForm = ({ handleUpdateBoard, isOpenEdit, onCloseEdit, curr
 
   const handleSubmitForm = (e) => {
     e.preventDefault()
-    handleUpdateBoard(editedBoard)
+    handleUpdateBoard({ ...editedBoard, color: boardColor })
     setEditedBoard(editedBoard)
     onCloseEdit()
   }
 
   return (
-    <Modal isOpen={isOpenEdit} onCloseEdit={onCloseEdit}>
+    <Modal isOpen={isOpenEdit} onClose={onCloseEdit}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit board</ModalHeader>
@@ -53,33 +59,23 @@ export const EditBoardForm = ({ handleUpdateBoard, isOpenEdit, onCloseEdit, curr
             />
           </FormControl>
           <FormControl mt={4}>
-            <Select
+            <CirclePicker
               name="color"
-              value={editedBoard.color}
-              onChange={handleEditBoard}
-              variant="flushed"
-              placeholder="Board color"
-            >
-              <option value="blue.400">Blue</option>
-              <option value="red.400">Red</option>
-              <option value="green.400">Green</option>
-              <option value="pink.400">Pink</option>
-              <option value="purple.400">Purple</option>
-              <option value="yellow.400">Yellow</option>
-              <option value="cyan.400">Cyan</option>
-              <option value="gray.500">Gray</option>
-            </Select>
+              onChange={(color) => {
+                setBoardColor(color.hex)
+              }}
+            />
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
           <Button
-            background={editedBoard.color}
+            background={boardColor}
             onClick={handleSubmitForm}
             colorScheme="blue"
             mr={3}
             _hover={{
-              background: editedBoard.color,
+              background: boardColor,
             }}
           >
             Update board

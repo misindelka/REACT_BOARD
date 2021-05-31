@@ -1,16 +1,25 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import * as React from 'react'
-import { Text, Box } from '@chakra-ui/react'
-import { CopyIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { Text, Box, Badge } from '@chakra-ui/react'
+
 import { createTask, removeTask } from '../../../utils/api'
 import { AlertDeleteTask } from './AlertDeleteForm'
-// import { id } from 'date-fns/locale'
+import { TaskMenu } from '../Components/TaskMenu'
 
 // eslint-disable-next-line react/prop-types
-export const Task = ({ task, boardId, handleEditTask, taskGroupId, fetchBoard, taskIds }) => {
-  const handleCopyTask = () => {
-    createTask(boardId, taskGroupId, { ...task, id: null })
+export const Task = ({
+  task,
+  boardId,
+  handleEditTask,
+  handleArchiveTask,
+  taskGroupId,
+  fetchBoard,
+  taskIds,
+}) => {
+  const handleCopyTask = async () => {
+    await createTask(boardId, taskGroupId, { ...task, id: null })
     fetchBoard()
   }
   const [isOpen, setIsOpen] = React.useState(false)
@@ -19,6 +28,7 @@ export const Task = ({ task, boardId, handleEditTask, taskGroupId, fetchBoard, t
       <>
         {taskIds.includes(task.id) && (
           <Box
+            display={task.archived ? 'none' : 'block'}
             key={task.id}
             m="2"
             maxW="md"
@@ -28,25 +38,27 @@ export const Task = ({ task, boardId, handleEditTask, taskGroupId, fetchBoard, t
             background="white"
             shadow="2"
           >
-            <EditIcon
-              cursor="pointer"
-              onClick={() => {
-                handleEditTask(task)
-              }}
-              float="left"
-              boxSize="1.3em"
-              m="2"
+            {task.priority ? (
+              <Badge
+                colorScheme={
+                  task.priority === 'Low' ? 'green' : task.priority === 'Medium' ? 'yellow' : 'red'
+                }
+                ml="3"
+                mt="3"
+              >
+                {task.priority}
+              </Badge>
+            ) : (
+              ''
+            )}
+            <TaskMenu
+              setIsOpen={setIsOpen}
+              task={task}
+              handleCopyTask={handleCopyTask}
+              handleEditTask={handleEditTask}
+              handleArchiveTask={handleArchiveTask}
             />
-            <CopyIcon onClick={handleCopyTask} cursor="pointer" boxSize="1.3em" m="2" />
-            <DeleteIcon
-              cursor="pointer"
-              onClick={() => {
-                setIsOpen(true)
-              }}
-              float="right"
-              boxSize="1.3em"
-              m="2"
-            />
+
             <Box textAlign="center">
               <Text fontWeight="bold" textTransform="uppercase" pt="3" fontSize="xl">
                 {task.name}

@@ -18,6 +18,7 @@ import {
 const initialNewTaskValue = {
   name: '',
   content: '',
+  archived: false,
 }
 
 export const AddNewTask = ({
