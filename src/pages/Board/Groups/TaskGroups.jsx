@@ -5,18 +5,26 @@ import * as React from 'react'
 import { Box, Button, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import { createTask, removeTaskGroup, updateTask, updateTaskGroup } from '../../../utils/api'
+import {
+  createTask,
+  getTasks,
+  removeTaskGroup,
+  updateTask,
+  updateTaskGroup,
+} from '../../../utils/api'
 import { Task } from './Task'
 import { AddNewTask } from '../Components/AddNewTask'
 import { EditTaskForm } from '../Components/EditTaskForm'
 import { EditGroupForm } from '../Components/EditGroupForm'
 import { AlertDeleteGroup } from './AlertDeleteForm'
+import { useFetch } from '../../../hooks/useFetch'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
   const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
   const [isOpen, setIsOpen] = React.useState(false)
+  const { fetchData: fetchTasks } = useFetch(getTasks, board.id)
   const {
     isOpen: isOpenCreateTask,
     onOpen: onOpenCreateTask,
@@ -37,6 +45,11 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
   const handleEditTask = (task) => {
     setCurrentTask(task)
     onOpenEditTask()
+  }
+
+  const handleArchiveTask = (task) => {
+    updateTask(task.id, { ...task, archived: true })
+    fetchTasks()
   }
 
   const handleUpdateTask = (data) => {
@@ -113,6 +126,7 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
                           {...provided.dragHandleProps}
                         >
                           <Task
+                            handleArchiveTask={handleArchiveTask}
                             taskIds={taskIds}
                             taskGroupId={group.id}
                             boardId={board.id}
