@@ -69,64 +69,66 @@ const Boards = () => {
       />
     </Center>
   ) : (
-    <Grid mt="3" gridTemplateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr 1fr' }}>
-      {boards.length < 1 ? (
-        <FirstBoardForm
+    <>
+      <Grid mt="3" gridTemplateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr 1fr' }}>
+        {boards.length < 1 ? (
+          <FirstBoardForm
+            boardColor={boardColor}
+            newBoard={newBoard}
+            handleAddNewBoard={handleAddNewBoard}
+            setBoardColor={setBoardColor}
+            handleSubmitForm={handleSubmitForm}
+          />
+        ) : (
+          <>
+            {boards.map((board) => (
+              <BoardCard
+                boardColor={boardColor}
+                setBoardColor={setBoardColor}
+                boardId={board.id}
+                key={board.id}
+                board={board}
+                handleRemoveBoard={handleRemoveBoard}
+                handleEditBoard={handleEditBoard}
+              />
+            ))}
+            <Button
+              borderColor="blue"
+              h="105px"
+              mt="15%"
+              mr="3"
+              ml="3"
+              leftIcon={<PlusSquareIcon />}
+              onClick={onOpenCreate}
+              cursor="pointer"
+            >
+              Add new board
+            </Button>
+          </>
+        )}
+
+        <AddBoardForm
           boardColor={boardColor}
           newBoard={newBoard}
-          handleAddNewBoard={handleAddNewBoard}
           setBoardColor={setBoardColor}
+          handleAddNewBoard={handleAddNewBoard}
+          handleCreateBoard={handleCreateBoard}
+          isOpen={isOpenCreate}
+          onOpen={onOpenCreate}
+          onClose={onCloseCreate}
           handleSubmitForm={handleSubmitForm}
         />
-      ) : (
-        <>
-          {boards.map((board) => (
-            <BoardCard
-              boardColor={boardColor}
-              setBoardColor={setBoardColor}
-              boardId={board.id}
-              key={board.id}
-              board={board}
-              handleRemoveBoard={handleRemoveBoard}
-              handleEditBoard={handleEditBoard}
-            />
-          ))}
-          <Button
-            borderColor="blue"
-            h="105px"
-            mt="15%"
-            mr="3"
-            ml="3"
-            leftIcon={<PlusSquareIcon />}
-            onClick={onOpenCreate}
-            cursor="pointer"
-          >
-            Add new board
-          </Button>
-        </>
-      )}
-
-      <AddBoardForm
-        boardColor={boardColor}
-        newBoard={newBoard}
-        setBoardColor={setBoardColor}
-        handleAddNewBoard={handleAddNewBoard}
-        handleCreateBoard={handleCreateBoard}
-        isOpen={isOpenCreate}
-        onOpen={onOpenCreate}
-        onClose={onCloseCreate}
-        handleSubmitForm={handleSubmitForm}
-      />
-      <EditBoardForm
-        setBoardColor={setBoardColor}
-        boardColor={boardColor}
-        currentBoard={currentBoard}
-        handleUpdateBoard={handleUpdateBoard}
-        isOpenEdit={isOpenEdit}
-        onOpenEdit={onOpenEdit}
-        onCloseEdit={onCloseEdit}
-      />
-    </Grid>
+        <EditBoardForm
+          setBoardColor={setBoardColor}
+          boardColor={boardColor}
+          currentBoard={currentBoard}
+          handleUpdateBoard={handleUpdateBoard}
+          isOpenEdit={isOpenEdit}
+          onOpenEdit={onOpenEdit}
+          onCloseEdit={onCloseEdit}
+        />
+      </Grid>
+    </>
   )
 }
 

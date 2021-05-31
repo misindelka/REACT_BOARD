@@ -1,34 +1,86 @@
 {
   "boards": [
     {
-      "name": "adfada",
-      "color": "#3f51b5",
-      "members": [],
+      "name": "Livka",
+      "color": "#9c27b0",
+      "members": [
+        "Livka Bodzášová",
+        "Vladimír Tomko"
+      ],
       "id": 1
     }
   ],
   "taskGroups": [
     {
-      "name": "Michal",
+      "name": "asljdhaskld",
       "boardId": 1,
       "taskIds": [
-        1
+        1,
+        2,
+        3,
+        4,
+        5
       ],
       "id": 1
     }
   ],
   "tasks": [
     {
-      "name": "<+ľ<qw",
-      "content": "ASas",
+      "name": "+ľšš+ľ",
+      "content": "asdasd",
       "minutes": 0,
       "completedMinutes": 0,
       "assignedTo": [],
-      "archived": true,
+      "archived": false,
       "boardId": 1,
       "date": "31.05.2021",
       "id": 1,
+      "priority": "High"
+    },
+    {
+      "name": "asd",
+      "content": "123",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 2,
       "priority": "Medium"
+    },
+    {
+      "name": "+ľš+ľš",
+      "content": "asda",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 3
+    },
+    {
+      "name": "+ľš",
+      "content": "asd",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 4
+    },
+    {
+      "name": "+ľš+ľ",
+      "content": "asd",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 5
     }
   ]
 }

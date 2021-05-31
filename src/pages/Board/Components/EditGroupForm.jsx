@@ -37,8 +37,8 @@ export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hov
         <Button
           color="white"
           leftIcon={<EditIcon />}
-          background={boardColor}
           float="left"
+          background="none"
           w="4"
           mt="-1"
           _hover={{

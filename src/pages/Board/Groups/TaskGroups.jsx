@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import * as React from 'react'
-import { Box, Button, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import {
@@ -72,14 +72,14 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
   return (
     <>
       <Box
+        outline="none"
         key={group.id}
         shadow={group.taskIds < 1 ? 'none' : 'base'}
-        minH="17.5vh"
-        maxH={['78vh', '83.3vh']}
         minW="350px"
+        h="90vh"
         borderWidth={group.taskIds < 1 ? '0px' : '1px'}
         borderRadius="lg"
-        backgroundColor={group.taskIds < 1 ? 'gray.100' : 'white'}
+        backgroundColor={useColorModeValue('gray.100', '#1A202C')}
         overflowY={['scroll', 'hidden']}
       >
         <Box
@@ -93,6 +93,7 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
           textAlign="center"
           p="5"
           fontSize="2xl"
+          color="white"
         >
           <EditGroupForm
             hoverColor={hoverColor}
@@ -107,6 +108,7 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
             onClick={() => {
               setIsOpen(true)
             }}
+            color="white"
             float="right"
             w="4"
             h="8"
@@ -146,7 +148,7 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
           </Droppable>
         </DragDropContext>
 
-        <Box m="2">
+        <Box h="100" m="2">
           <Button
             w="100%"
             textTransform="uppercase"
