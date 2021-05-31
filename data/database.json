@@ -1,0 +1,34 @@
+{
+  "boards": [
+    {
+      "name": "adfada",
+      "color": "#3f51b5",
+      "members": [],
+      "id": 1
+    }
+  ],
+  "taskGroups": [
+    {
+      "name": "Michal",
+      "boardId": 1,
+      "taskIds": [
+        1
+      ],
+      "id": 1
+    }
+  ],
+  "tasks": [
+    {
+      "name": "<+ľ<qw",
+      "content": "ASas",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": true,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 1,
+      "priority": "Medium"
+    }
+  ]
+}

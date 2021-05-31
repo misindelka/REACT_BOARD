@@ -11,12 +11,14 @@ import { AddNewTask } from '../Components/AddNewTask'
 import { EditTaskForm } from '../Components/EditTaskForm'
 import { EditGroupForm } from '../Components/EditGroupForm'
 import { AlertDeleteGroup } from './AlertDeleteForm'
+import { useFetch } from '../../../hooks/useFetch'
 
 // eslint-disable-next-line react/prop-types
-export const TaskGroups = ({ group, board, fetchBoard, hoverColor, setBoard }) => {
+export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
   const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
   const [isOpen, setIsOpen] = React.useState(false)
+
   const {
     isOpen: isOpenCreateTask,
     onOpen: onOpenCreateTask,
@@ -41,14 +43,19 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor, setBoard }) =
     onOpenEditTask()
   }
 
+  const handleArchiveTask = (task) => {
+    updateTask(task.id, { ...task, archived: true })
+    fetchBoard()
+  }
+
   const handleUpdateTask = (data) => {
     updateTask(currentTask.id, data)
     fetchBoard()
   }
 
-  const handleUpdateGroup = (editedGroup) => {
-    updateTaskGroup(editedGroup.id, editedGroup)
-    const filteredTasks = tasks.filter((i) => editedGroup.taskIds.includes(i.id))
+  const handleUpdateGroup = async (editedGroup) => {
+    await updateTaskGroup(editedGroup.id, editedGroup)
+    const filteredTasks = board.tasks.filter((i) => editedGroup.taskIds.includes(i.id))
     const updatedTasksBoardIds = filteredTasks.reduce((acc, currVal) => {
       return [...acc, { ...currVal, boardId: editedGroup.boardId }]
     }, [])
@@ -93,7 +100,7 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor, setBoard }) =
         minW="350px"
         borderWidth={group.taskIds < 1 ? '0px' : '1px'}
         borderRadius="lg"
-        backgroundColor={group.taskIds < 1 ? 'gray.100' : '#F7FAFC'}
+        backgroundColor={group.taskIds < 1 ? 'gray.100' : 'white'}
         overflowY={['scroll', 'hidden']}
       >
         <Box
@@ -127,11 +134,11 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor, setBoard }) =
           />
         </Box>
         <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId={`${group.id}`}>
+          <Droppable droppableId="dropTasks">
             {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
+              <div ref={provided.innerRef} {...provided.droppableProps}>
                 <Box maxH={['55vh', '68vh']} overflowY="scroll">
-                  {tasks?.map((task, index) => (
+                  {board.tasks?.map((task, index) => (
                     <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
                       {(provided) => (
                         <div
@@ -140,18 +147,21 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor, setBoard }) =
                           {...provided.dragHandleProps}
                         >
                           <Task
+                            handleArchiveTask={handleArchiveTask}
                             taskIds={group.taskIds}
                             taskGroupId={group.id}
                             boardId={board.id}
+                            key={task.id}
                             task={task}
                             handleEditTask={handleEditTask}
+                            fetchBoard={fetchBoard}
                           />
                         </div>
                       )}
                     </Draggable>
                   ))}
+                  {provided.placeholder}
                 </Box>
-                {provided.placeholder}
               </div>
             )}
           </Droppable>

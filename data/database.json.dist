@@ -3,7 +3,8 @@
     {
       "name": "Sudo Academy: Capstone Project",
       "id": 1,
-      "color": "blue.400"
+      "color": "blue.400",
+      "members" : []
     }
   ],
   "taskGroups": [
@@ -20,7 +21,8 @@
       "content": "git clone and npm install",
       "boardId": 1,
       "date": "11.2.2021",
-      "id":1
+      "id":1,
+      "archived":false
     }
   ]
 }

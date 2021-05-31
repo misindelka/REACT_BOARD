@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react'
-
 import {
   Button,
   FormControl,
@@ -12,28 +11,18 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
 } from '@chakra-ui/react'
+import { CirclePicker } from 'react-color'
 
-const initialNewBoardValue = {
-  name: '',
-  color: 'blue.400',
-}
-export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
-  const [newBoard, setNewBoard] = React.useState(initialNewBoardValue)
-
-  const handleAddNewBoard = (e) => {
-    const { name, value } = e.target
-    setNewBoard({ ...newBoard, [`${name}`]: value })
-  }
-
-  const handleSubmitForm = (e) => {
-    e.preventDefault()
-    handleCreateBoard(newBoard)
-    setNewBoard(initialNewBoardValue)
-    onClose()
-  }
-
+export const AddBoardForm = ({
+  newBoard,
+  isOpen,
+  onClose,
+  setBoardColor,
+  handleAddNewBoard,
+  handleSubmitForm,
+  boardColor,
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -53,22 +42,9 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
             />
           </FormControl>
           <FormControl mt={4}>
-            <Select
-              name="color"
-              value={newBoard.color}
-              onChange={handleAddNewBoard}
-              variant="flushed"
-              placeholder="Board color"
-            >
-              <option value="blue.400">Blue</option>
-              <option value="red.400">Red</option>
-              <option value="green.400">Green</option>
-              <option value="pink.400">Pink</option>
-              <option value="purple.400">Purple</option>
-              <option value="yellow.400">Yellow</option>
-              <option value="cyan.400">Cyan</option>
-              <option value="gray.500">Gray</option>
-            </Select>
+            <center>
+              <CirclePicker name="color" onChange={(color) => setBoardColor(color.hex)} />
+            </center>
           </FormControl>
         </ModalBody>
 
@@ -76,9 +52,9 @@ export const AddBoardForm = ({ handleCreateBoard, isOpen, onClose }) => {
           <Button
             isDisabled={!newBoard.name}
             onClick={handleSubmitForm}
-            background={newBoard.color}
+            background={boardColor}
             _hover={{
-              background: newBoard.color,
+              background: boardColor,
             }}
             mr={3}
             color="white"

@@ -23,10 +23,7 @@ export const EditGroupForm = ({ boardColor, currentGroup, handleUpdateGroup, hov
 
   const handleEditGroup = (e) => {
     const { name, value } = e.target
-    setEditedGroup({
-      ...editedGroup,
-      [name]: editedGroup.boardId ? parseFloat(value) : value,
-    })
+    setEditedGroup({ ...editedGroup, [name]: editedGroup.boardId ? parseFloat(value) : value })
   }
 
   const handleSubmitForm = (e) => {

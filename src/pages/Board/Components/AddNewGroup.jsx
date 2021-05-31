@@ -14,24 +14,13 @@ import {
 } from '@chakra-ui/react'
 import { PlusSquareIcon } from '@chakra-ui/icons'
 
-const initialGroupValue = {
-  name: '',
-  boardId: null,
-}
-
-export const AddNewGroup = ({ handleCreateGroup, boardId, boardColor, hoverColor }) => {
-  const [newGroup, setNewGroup] = React.useState(initialGroupValue)
-
-  const handleAddNewGroup = (e) => {
-    const { name, value } = e.target
-    setNewGroup({ ...newGroup, [name]: value, boardId })
-  }
-  const handleSubmitNewGroup = (e) => {
-    e.preventDefault()
-    handleCreateGroup(newGroup)
-    setNewGroup(initialGroupValue)
-  }
-
+export const AddNewGroup = ({
+  handleSubmitNewGroup,
+  handleAddNewGroup,
+  boardColor,
+  hoverColor,
+  newGroup,
+}) => {
   return (
     <Box
       textColor="white"
