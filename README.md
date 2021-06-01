@@ -64,4 +64,4 @@ You'll need to run `node node_modules/esbuild/install.js` in the root of your pr
 ## Contributors
 
 Michal Sindelka - https://github.com/misindelka
-Vladimir tomko - https://github.com/VladimirTomko
+Vladimir Tomko - https://github.com/VladimirTomko
