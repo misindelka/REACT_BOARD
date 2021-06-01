@@ -1,26 +1,13 @@
-# React-Board
+# ReactBoard
+![Snímka obrazovky 2021-06-01 o 8 51 02](https://user-images.githubusercontent.com/82036512/120279246-810ecf80-c2b6-11eb-95ae-108170d8d77f.png)
+![Snímka obrazovky 2021-06-01 o 8 48 42](https://user-images.githubusercontent.com/82036512/120279029-43aa4200-c2b6-11eb-911c-043469fe06f7.png)
 
 
 ## Project description
 
-Given the basic application scaffolding, **your goal is to build a simple task management
-tool similar to [Trello](https://trello.com/en)**. If you haven't heard about Trello up
-until now, now would be a good time to go check it out.
+**ReactBoard** is a student project with aim to create collaboration tool that organizes your projects into boards. In one glance, **ReactBoard** tells you what's being worked on, who's working on what, and where something is in a process. Imagine a white board, filled with lists of sticky notes, with each note as a task for you and your team. Now imagine that you can take that whiteboard anywhere you go on your smartphone, and can access it from any computer through the web. That's **ReactBoard**!
 
-Worry not, you don't have to build a fully-featured clone of Trello. While there are
-a few functional requirements you will have to meet but we'd like to encourage you to
-make it your own unique creation in the first place.
-
-Now, without further ado, go ahead and [set up a new Trello account for free](https://trello.com/signup).
-Other than getting some inspiration, you'll also be using Trello to manage your project
-until your own app is ready for the prime time. Your project coordinator should've given
-you access to a templated Trello board which reflects the best practices in the world
-of digital project management.
-
-### Functional Requirements
-
-These are non-negotiable project requirements that you HAVE TO meet to consider your
-project shippable:
+### Functionality
 
 - Creating new boards
 - Editing boards
@@ -33,26 +20,9 @@ project shippable:
 - Archiving cards
 - Drag and drop cards between lists
 
-
-### Bring Your Own Idea™️
-
-As stated earlier, you're more than encouraged to come up with your own enhancements
-and features. Here are a few examples for additional features we thought are nice
-to have:
-
-- Copy
-- Move to another board
-- Share
-- Stats
-- Users
-- Code-splitting
-
-
-
 ### Environment Setup
 
-
-1. Clone the repository
+1. Clone the repository 
 
    ```sh
    git clone https://github.com/USERNAME/REPONAME.git
@@ -65,13 +35,12 @@ to have:
    git remote add upstream git@github.com:sudolabs-io/bootcamp-final-assignment.git
    ```
 
-2. Make a copy of [data/database.json.dist](data/database.json.dist) and rename it to `data/database.json`
-3. ```npm install```
-4. ```npm run start:server```
-5. ```npm run start:client```
-6. Head out to the Trello board, pick a task and start working on it, then rinse and repeat.
-7. ```code REPONAME``` and install the recommended extension
-
+3. Make a copy of [data/database.json.dist](data/database.json.dist) and rename it to `data/database.json`
+4. ```npm install```
+5. ```npm run start:server```
+6. ```npm run start:client```
+7. Head out to the Trello board, pick a task and start working on it, then rinse and repeat.
+8. ```code REPONAME``` and install the recommended extension
 
 
 ## Documentation
@@ -91,3 +60,8 @@ Open [vite.config.js](vite.config.js) and uncomment the relevant section that en
 ### Esbuild is failing to build the project on Windows
 
 You'll need to run `node node_modules/esbuild/install.js` in the root of your project.
+
+## Contributors
+
+Michal Sindelka - https://github.com/misindelka
+Vladimir tomko - https://github.com/VladimirTomko
