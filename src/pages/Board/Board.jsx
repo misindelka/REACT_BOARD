@@ -5,7 +5,13 @@ import { useParams } from 'react-router-dom'
 import { Box, Stack, useColorModeValue } from '@chakra-ui/react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { TaskGroups } from './Groups/TaskGroups'
-import { createTaskGroup, getBoard, updateTaskGroup } from '../../utils/api'
+import {
+  createTaskGroup,
+  getBoard,
+  getTaskGroups,
+  updateTaskGroup,
+  updateTaskGroups,
+} from '../../utils/api'
 import { useFetch } from '../../hooks/useFetch'
 import { AddNewGroup } from './Components/AddNewGroup'
 import { FirstGroupForm } from './Components/FirstGroupForm'
@@ -17,6 +23,7 @@ const initialGroupValue = {
 const Board = () => {
   const { id } = useParams()
   const { data: board, fetchData: fetchBoard } = useFetch(getBoard, id)
+  const { data: taskGroups } = useFetch(getTaskGroups)
   const [newGroup, setNewGroup] = React.useState(initialGroupValue)
 
   const hoverColor = board.color?.replace('400', '500')
@@ -33,14 +40,21 @@ const Board = () => {
     handleCreateGroup(newGroup)
     setNewGroup(initialGroupValue)
   }
-  const handleOnDragEnd = (result) => {
-    console.log(result.source.index)
-    console.log(result.destination.index)
-  }
 
   const handleEditGroup = async (taskGroupId) => {
     await updateTaskGroup(taskGroupId)
     fetchBoard()
+  }
+
+  const handleOnDragEnd = (result) => {
+    const items = Array.from(board.taskGroups)
+    const [reorderedGroup] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0, reorderedGroup)
+
+    updateTaskGroups(taskGroups, items)
+
+    console.log('items', items)
+    // console.log('board', board.taskGroups)
   }
 
   return (

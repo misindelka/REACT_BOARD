@@ -7,10 +7,10 @@ import { DeleteIcon } from '@chakra-ui/icons'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import {
   createTask,
-  getTasks,
   removeTaskGroup,
   updateTask,
   updateTaskGroup,
+  getTask,
 } from '../../../utils/api'
 import { Task } from './Task'
 import { AddNewTask } from '../Components/AddNewTask'
@@ -23,6 +23,8 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
   const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
   const [isOpen, setIsOpen] = React.useState(false)
+
+  const tasks = board.tasks.map((i) => i)
 
   const {
     isOpen: isOpenCreateTask,
@@ -66,7 +68,33 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
     fetchBoard()
   }
 
-  const taskIds = group.taskIds.map((i) => i)
+  const handleOnDragEnd = async (result) => {
+    console.log({ result })
+    // if (result.destination) {
+    //   return
+    // }
+
+    // if (
+    //   result.destination.droppableId === result.source.droppableId &&
+    //   result.destination.index === result.source.index
+    // ) {
+    //   return
+    // }
+
+    //   const start = board.taskGroups[result.source.droppableId]
+    //   const finish = board.taskGrpups[result.destination.droppableId]
+
+    //  if (start === finish) {}
+
+    const items = [...group.taskIds]
+    const [reorderedId] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0, reorderedId)
+
+    await updateTaskGroup(group.id, { ...group, taskIds: items })
+    fetchBoard()
+    console.log('items', items)
+    console.log('taskIds', group.taskIds)
+  }
 
   const handleShowArchived = async () => {
     const allTasks = await getTasks(board.id)
@@ -122,33 +150,36 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
             h="8"
           />
         </Box>
-        <DragDropContext>
-          <Droppable droppableId="dropTasks">
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId={`${group.id}`}>
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
-                <Box maxH={['55vh', '65vh']} overflowY="scroll">
-                  {board.tasks?.map((task, index) => (
-                    <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <Task
-                            handleArchiveTask={handleArchiveTask}
-                            taskIds={taskIds}
-                            taskGroupId={group.id}
-                            boardId={board.id}
-                            key={task.id}
-                            task={task}
-                            handleEditTask={handleEditTask}
-                            fetchBoard={fetchBoard}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
+                <Box maxH={['55vh', '68vh']} overflowY="scroll">
+                  {tasks?.map(
+                    (task, index) =>
+                      group.taskIds.includes(task.id) && (
+                        <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <Task
+                                handleArchiveTask={handleArchiveTask}
+                                taskIds={group.taskIds}
+                                taskGroupId={group.id}
+                                boardId={board.id}
+                                key={task.id}
+                                task={task}
+                                handleEditTask={handleEditTask}
+                                fetchBoard={fetchBoard}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      )
+                  )}
                   {provided.placeholder}
                 </Box>
               </div>

@@ -5,7 +5,8 @@
       "color": "#9c27b0",
       "members": [
         "Livka Bodzášová",
-        "Vladimír Tomko"
+        "Vladimír Tomko",
+        "michal"
       ],
       "id": 1
     },
@@ -13,7 +14,8 @@
       "name": "123",
       "color": "#e91e63",
       "members": [
-        "Asd"
+        "Asd",
+        "vlado prvni"
       ],
       "id": 2
     }
@@ -38,7 +40,9 @@
     {
       "name": "asd",
       "boardId": 1,
-      "taskIds": [],
+      "taskIds": [
+        12
+      ],
       "id": 2
     },
     {
@@ -163,7 +167,18 @@
       "boardId": 2,
       "date": "31.05.2021",
       "id": 11,
-      "priority": "High"
+      "priority": "Medium"
+    },
+    {
+      "name": "fewf",
+      "content": "ewffew",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "01.06.2021",
+      "id": 12
     }
   ]
 }

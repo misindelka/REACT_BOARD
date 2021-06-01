@@ -28,7 +28,6 @@ export const AddNewTask = ({
   groupId,
   boardColor,
   hoverColor,
-  fetchBoard,
 }) => {
   const [newTask, setNewTask] = React.useState(initialNewTaskValue)
 
@@ -37,12 +36,10 @@ export const AddNewTask = ({
     setNewTask({ ...newTask, [name]: value })
   }
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault()
-    handleCreateTask(newTask, groupId)
-    onClose()
+    await handleCreateTask(newTask, groupId)
     setNewTask(initialNewTaskValue)
-    fetchBoard()
   }
 
   return (
@@ -77,7 +74,7 @@ export const AddNewTask = ({
         <ModalFooter>
           <Button
             isDisabled={!newTask.name || !newTask.content}
-            onClick={(e) => handleSubmitForm(e)}
+            onClick={handleSubmitForm}
             color="white"
             background={boardColor}
             mr={3}

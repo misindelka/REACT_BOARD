@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 
 import { ChevronDownIcon, CopyIcon, DeleteIcon, EditIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { getTasks, updateTask } from '../../../utils/api'
+import { getBoard, updateTask } from '../../../utils/api'
 import { useFetch } from '../../../hooks/useFetch'
 
 export const TaskMenu = ({
@@ -24,10 +24,10 @@ export const TaskMenu = ({
   handleEditTask,
   handleArchiveTask,
 }) => {
-  const { fetchData: fetchTasks } = useFetch(getTasks)
+  const { fetchData: fetchBoard } = useFetch(getBoard)
   const handleEditLabel = async (e) => {
     await updateTask(task.id, { ...task, priority: e.target.textContent })
-    fetchTasks(task.boardId)
+    fetchBoard()
   }
   return (
     <Popover>
