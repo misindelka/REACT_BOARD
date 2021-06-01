@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, HStack, Grid, useDisclosure } from '@chakra-ui/react'
+import { Box, HStack, Grid, useDisclosure, useColorModeValue } from '@chakra-ui/react'
 import { MdDashboard } from 'react-icons/md'
 import { HiViewBoards } from 'react-icons/hi'
 import { MenuToggle } from './MenuToggle'
@@ -7,12 +7,18 @@ import { NavLink } from './NavLink'
 import { NavButton } from './NavButton'
 import { BrandLogo } from './BrandLogo'
 import { ModalMenu } from './ModalMenu'
+import { ColorMode } from '../../../pages/ColorMode'
 
 const NavBar = () => {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
-    <Box as="header" bg="white" borderBottom="1px" borderBottomColor="gray.200">
+    <Box
+      as="header"
+      bg={useColorModeValue('gray.100', '#1A202C')}
+      borderBottom="1px"
+      borderBottomColor="gray.200"
+    >
       <HStack mx="auto" justify="space-between" maxW="7xl" px={{ base: 6, md: 8 }} py={4}>
         <HStack align="center" spacing={10}>
           <BrandLogo />
@@ -20,6 +26,7 @@ const NavBar = () => {
           <HStack align="center" d={{ base: 'none', sm: 'flex' }} spacing={8}>
             <NavLink to="/">Dashboard</NavLink>
             <NavLink to="/boards">Boards</NavLink>
+            <ColorMode />
           </HStack>
         </HStack>
 

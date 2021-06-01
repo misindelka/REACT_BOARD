@@ -1,110 +1,169 @@
 {
   "boards": [
     {
-      "name": "adfada",
-      "color": "#3f51b5",
-      "members": [],
+      "name": "Livka",
+      "color": "#9c27b0",
+      "members": [
+        "Livka Bodzášová",
+        "Vladimír Tomko"
+      ],
       "id": 1
     },
     {
-      "name": "Michal Sindelka",
+      "name": "123",
       "color": "#e91e63",
-      "members": [],
+      "members": [
+        "Asd"
+      ],
       "id": 2
     }
   ],
   "taskGroups": [
     {
-      "name": "Michal",
+      "name": "asljdhaskld",
       "boardId": 1,
       "taskIds": [
-        1
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10
       ],
       "id": 1
     },
     {
-      "name": "Michal Sindelka",
+      "name": "asd",
       "boardId": 1,
       "taskIds": [],
       "id": 2
     },
     {
-      "name": "Ovocie",
+      "name": "Hello",
       "boardId": 2,
       "taskIds": [
-        3,
-        2
+        11
       ],
       "id": 3
-    },
-    {
-      "name": "Michal ",
-      "boardId": 2,
-      "taskIds": [
-        4,
-        null,
-        5,
-        null
-      ],
-      "id": 4
     }
   ],
   "tasks": [
     {
-      "name": "<+ľ<qw",
-      "content": "ASas",
+      "name": "+ľšš+ľ",
+      "content": "asdasd",
       "minutes": 0,
       "completedMinutes": 0,
       "assignedTo": [],
-      "archived": true,
+      "archived": false,
       "boardId": 1,
       "date": "31.05.2021",
       "id": 1,
+      "priority": "High"
+    },
+    {
+      "name": "asd",
+      "content": "123",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 2,
       "priority": "Medium"
     },
     {
-      "name": "1",
-      "content": "1",
+      "name": "+ľš+ľš",
+      "content": "asda",
       "minutes": 0,
       "completedMinutes": 0,
       "assignedTo": [],
       "archived": false,
-      "boardId": 2,
-      "date": "31.05.2021",
-      "id": 2
-    },
-    {
-      "name": "2",
-      "content": "2",
-      "minutes": 0,
-      "completedMinutes": 0,
-      "assignedTo": [],
-      "archived": false,
-      "boardId": 2,
+      "boardId": 1,
       "date": "31.05.2021",
       "id": 3
     },
     {
-      "name": "Michal Sindelka",
-      "content": "ty56y",
+      "name": "+ľš",
+      "content": "asd",
       "minutes": 0,
       "completedMinutes": 0,
       "assignedTo": [],
       "archived": false,
-      "boardId": 2,
+      "boardId": 1,
       "date": "31.05.2021",
-      "id": 4
+      "id": 4,
+      "priority": "Medium"
     },
     {
-      "name": "Jahody",
-      "content": "jahody\n",
+      "name": "Working",
+      "content": "working",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 5
+    },
+    {
+      "name": "+ľš",
+      "content": "asd",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 7
+    },
+    {
+      "name": "+ľš",
+      "content": "asd",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 8
+    },
+    {
+      "name": "+ľš+ľš",
+      "content": "asd",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 9
+    },
+    {
+      "name": "+ľš",
+      "content": "asd",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 1,
+      "date": "31.05.2021",
+      "id": 10
+    },
+    {
+      "name": "+ľš",
+      "content": "asd",
       "minutes": 0,
       "completedMinutes": 0,
       "assignedTo": [],
       "archived": false,
       "boardId": 2,
       "date": "31.05.2021",
-      "id": 5
+      "id": 11,
+      "priority": "High"
     }
   ]
 }

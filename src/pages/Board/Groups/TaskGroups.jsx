@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import * as React from 'react'
-import { Box, Button, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { createTask, removeTaskGroup, updateTask, updateTaskGroup } from '../../../utils/api'
@@ -42,8 +42,8 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
     onOpenEditTask()
   }
 
-  const handleArchiveTask = (task) => {
-    updateTask(task.id, { ...task, archived: true })
+  const handleArchiveTask = async (task) => {
+    await updateTask(task.id, { ...task, archived: true })
     fetchBoard()
   }
 
@@ -90,17 +90,25 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
     console.log('taskIds', group.taskIds)
   }
 
+  const handleShowArchived = async () => {
+    const allTasks = await getTasks(board.id)
+    allTasks.map(async (task) => {
+      await updateTask(task.id, { ...task, archived: false })
+    })
+    fetchBoard()
+  }
   return (
     <>
       <Box
+        outline="none"
         key={group.id}
         shadow={group.taskIds < 1 ? 'none' : 'base'}
-        minH="17.5vh"
-        maxH={['78vh', '83.3vh']}
         minW="350px"
+        minH="17.5vh"
+        maxH={['78vh', '85.3vh']}
         borderWidth={group.taskIds < 1 ? '0px' : '1px'}
         borderRadius="lg"
-        backgroundColor={group.taskIds < 1 ? 'gray.100' : 'white'}
+        backgroundColor={useColorModeValue('gray.100', '#1A202C')}
         overflowY={['scroll', 'hidden']}
       >
         <Box
@@ -114,8 +122,10 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
           textAlign="center"
           p="5"
           fontSize="2xl"
+          color="white"
         >
           <EditGroupForm
+            handleShowArchived={handleShowArchived}
             hoverColor={hoverColor}
             currentGroup={group}
             handleUpdateGroup={handleUpdateGroup}
@@ -128,6 +138,7 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
             onClick={() => {
               setIsOpen(true)
             }}
+            color="white"
             float="right"
             w="4"
             h="8"

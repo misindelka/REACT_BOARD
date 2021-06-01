@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import * as React from 'react'
-import { Text, Box, Badge } from '@chakra-ui/react'
+import { Text, Box, Badge, useColorModeValue } from '@chakra-ui/react'
 
 import { createTask, removeTask } from '../../../utils/api'
 import { AlertDeleteTask } from './AlertDeleteForm'
@@ -21,6 +21,7 @@ export const Task = ({
     await createTask(boardId, taskGroupId, { ...task, id: null })
     fetchBoard()
   }
+  const boxBackground = useColorModeValue('gray.100', '#1A202C')
   const [isOpen, setIsOpen] = React.useState(false)
   return (
     <Box>

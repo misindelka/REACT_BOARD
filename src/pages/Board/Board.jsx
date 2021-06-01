@@ -2,7 +2,7 @@
 /* eslint-disable no-shadow */
 import * as React from 'react'
 import { useParams } from 'react-router-dom'
-import { Badge, Box, Stack } from '@chakra-ui/react'
+import { Box, Stack, useColorModeValue } from '@chakra-ui/react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { TaskGroups } from './Groups/TaskGroups'
 import {
@@ -58,69 +58,68 @@ const Board = () => {
   }
 
   return (
-    <Box
-      overflowX="scroll"
-      overflowY={['scroll', 'hidden']}
-      minW="100vw"
-      h={['87vh', '93vh']}
-      bg="gray.100"
-      p="2"
-      pb="0"
-    >
-      <Badge pl="6" fontSize="30px" color={board.color}>
-        {board.name}
-      </Badge>
-      {board.taskGroups?.length < 1 ? (
-        <FirstGroupForm
-          color={board.color}
-          handleAddNewGroup={handleAddNewGroup}
-          newGroup={newGroup}
-          handleSubmitNewGroup={handleSubmitNewGroup}
-        />
-      ) : (
-        <DragDropContext direction="vertical" onDragEnd={handleOnDragEnd}>
-          <Droppable direction="horizontal" droppableId={`${board.id}`}>
-            {(provided) => (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
-                <Stack direction="row">
-                  {board.taskGroups?.map((group, index) => (
-                    <Draggable key={group.id} draggableId={`${group.id}`} index={index}>
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <TaskGroups
-                            hoverColor={hoverColor}
-                            group={group}
-                            board={board}
-                            fetchBoard={fetchBoard}
-                            handleCreateGroup={handleCreateGroup}
-                            handleEditGroup={handleEditGroup}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                  <AddNewGroup
-                    newGroup={newGroup}
-                    handleSubmitNewGroup={handleSubmitNewGroup}
-                    handleAddNewGroup={handleAddNewGroup}
-                    handleCreateGroup={handleCreateGroup}
-                    handleEditGroup={handleEditGroup}
-                    hoverColor={hoverColor}
-                    boardColor={board.color}
-                    boardId={board.id}
-                  />
-                </Stack>
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-      )}
-    </Box>
+    <>
+      <Box
+        overflowX="scroll"
+        overflowY={['scroll', 'hidden']}
+        minW="100vw"
+        bg={useColorModeValue('gray.100', '#1A202C')}
+        p="4"
+        pb="0"
+        h="90vh"
+      >
+        {board.taskGroups?.length < 1 ? (
+          <FirstGroupForm
+            color={board.color}
+            handleAddNewGroup={handleAddNewGroup}
+            newGroup={newGroup}
+            handleSubmitNewGroup={handleSubmitNewGroup}
+          />
+        ) : (
+          <DragDropContext direction="vertical" onDragEnd={handleOnDragEnd}>
+            <Droppable direction="horizontal" droppableId="dropGroups">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  <Stack direction="row">
+                    {board.taskGroups?.map((group, index) => (
+                      <Draggable key={group.id} draggableId={`${group.id}`} index={index}>
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <TaskGroups
+                              hoverColor={hoverColor}
+                              group={group}
+                              board={board}
+                              fetchBoard={fetchBoard}
+                              handleCreateGroup={handleCreateGroup}
+                              handleEditGroup={handleEditGroup}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                    <AddNewGroup
+                      newGroup={newGroup}
+                      handleSubmitNewGroup={handleSubmitNewGroup}
+                      handleAddNewGroup={handleAddNewGroup}
+                      handleCreateGroup={handleCreateGroup}
+                      handleEditGroup={handleEditGroup}
+                      hoverColor={hoverColor}
+                      boardColor={board.color}
+                      boardId={board.id}
+                    />
+                  </Stack>
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )}
+      </Box>
+    </>
   )
 }
 export default Board
