@@ -5,6 +5,12 @@
       "color": "#3f51b5",
       "members": [],
       "id": 1
+    },
+    {
+      "name": "Michal Sindelka",
+      "color": "#e91e63",
+      "members": [],
+      "id": 2
     }
   ],
   "taskGroups": [
@@ -15,6 +21,32 @@
         1
       ],
       "id": 1
+    },
+    {
+      "name": "Michal Sindelka",
+      "boardId": 1,
+      "taskIds": [],
+      "id": 2
+    },
+    {
+      "name": "Ovocie",
+      "boardId": 2,
+      "taskIds": [
+        3,
+        2
+      ],
+      "id": 3
+    },
+    {
+      "name": "Michal ",
+      "boardId": 2,
+      "taskIds": [
+        4,
+        null,
+        5,
+        null
+      ],
+      "id": 4
     }
   ],
   "tasks": [
@@ -29,6 +61,50 @@
       "date": "31.05.2021",
       "id": 1,
       "priority": "Medium"
+    },
+    {
+      "name": "1",
+      "content": "1",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 2,
+      "date": "31.05.2021",
+      "id": 2
+    },
+    {
+      "name": "2",
+      "content": "2",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 2,
+      "date": "31.05.2021",
+      "id": 3
+    },
+    {
+      "name": "Michal Sindelka",
+      "content": "ty56y",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 2,
+      "date": "31.05.2021",
+      "id": 4
+    },
+    {
+      "name": "Jahody",
+      "content": "jahody\n",
+      "minutes": 0,
+      "completedMinutes": 0,
+      "assignedTo": [],
+      "archived": false,
+      "boardId": 2,
+      "date": "31.05.2021",
+      "id": 5
     }
   ]
 }

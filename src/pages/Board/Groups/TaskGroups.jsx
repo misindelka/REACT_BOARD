@@ -11,13 +11,14 @@ import { AddNewTask } from '../Components/AddNewTask'
 import { EditTaskForm } from '../Components/EditTaskForm'
 import { EditGroupForm } from '../Components/EditGroupForm'
 import { AlertDeleteGroup } from './AlertDeleteForm'
-import { useFetch } from '../../../hooks/useFetch'
 
 // eslint-disable-next-line react/prop-types
 export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
   const [currentTask, setCurrentTask] = React.useState('')
   const [currentGroupId, setCurrentGroupId] = React.useState()
   const [isOpen, setIsOpen] = React.useState(false)
+
+  const tasks = board.tasks.map((i) => i)
 
   const {
     isOpen: isOpenCreateTask,
@@ -29,8 +30,6 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
     onOpen: onOpenEditTask,
     onClose: onCloseEditTask,
   } = useDisclosure()
-
-  const tasks = board.tasks?.filter((task) => group.taskIds.includes(task.id))
 
   const handleCreateTask = async (newTask) => {
     await createTask(board.id, currentGroupId, newTask)
@@ -64,11 +63,12 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
   }
 
   const handleOnDragEnd = async (result) => {
+    console.log({ result })
     // if (result.destination) {
     //   return
     // }
 
-    // if (ok
+    // if (
     //   result.destination.droppableId === result.source.droppableId &&
     //   result.destination.index === result.source.index
     // ) {
@@ -86,8 +86,8 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
 
     await updateTaskGroup(group.id, { ...group, taskIds: items })
     fetchBoard()
-    // console.log('items', items)
-    // console.log('taskIds', group.taskIds)
+    console.log('items', items)
+    console.log('taskIds', group.taskIds)
   }
 
   return (
@@ -134,32 +134,35 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
           />
         </Box>
         <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="dropTasks">
+          <Droppable droppableId={`${group.id}`}>
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 <Box maxH={['55vh', '68vh']} overflowY="scroll">
-                  {board.tasks?.map((task, index) => (
-                    <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <Task
-                            handleArchiveTask={handleArchiveTask}
-                            taskIds={group.taskIds}
-                            taskGroupId={group.id}
-                            boardId={board.id}
-                            key={task.id}
-                            task={task}
-                            handleEditTask={handleEditTask}
-                            fetchBoard={fetchBoard}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
+                  {tasks?.map(
+                    (task, index) =>
+                      group.taskIds.includes(task.id) && (
+                        <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <Task
+                                handleArchiveTask={handleArchiveTask}
+                                taskIds={group.taskIds}
+                                taskGroupId={group.id}
+                                boardId={board.id}
+                                key={task.id}
+                                task={task}
+                                handleEditTask={handleEditTask}
+                                fetchBoard={fetchBoard}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      )
+                  )}
                   {provided.placeholder}
                 </Box>
               </div>
