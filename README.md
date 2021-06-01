@@ -47,9 +47,7 @@ to have:
 - Users
 - Code-splitting
 
-## Project Overview
 
-In this section, you'll find relevant project information and a getting started guide.
 
 ### Environment Setup
 
