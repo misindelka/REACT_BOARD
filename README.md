@@ -1,14 +1,7 @@
-# Sudo Academy: Capstone Project
+# React-Board
 
-Congratulations! You're almost there but we have one last task for you before
-your graduation day. The best news? You can keep your project after the course's
-over and add it to your portfolio! Ain't that cool?
 
-It'll give you the much needed experience of working on a real-world project with
-a strict and non-negotiable deadline while providing the necessary freedom to get
-your wheels of creativity spinning.
-
-## Task Description
+## Project description
 
 Given the basic application scaffolding, **your goal is to build a simple task management
 tool similar to [Trello](https://trello.com/en)**. If you haven't heard about Trello up
