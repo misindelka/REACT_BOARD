@@ -7,6 +7,8 @@
 
 **ReactBoard** is a student project with aim to create collaboration tool that organizes your projects into boards. In one glance, **ReactBoard** tells you what's being worked on, who's working on what, and where something is in a process. Imagine a white board, filled with lists of sticky notes, with each note as a task for you and your team. Now imagine that you can take that whiteboard anywhere you go on your smartphone, and can access it from any computer through the web. That's **ReactBoard**!
 
+LINK : http://mv-react-board.herokuapp.com
+
 ### Functionality
 
 - Creating new boards
