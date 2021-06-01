@@ -53,8 +53,8 @@ In this section, you'll find relevant project information and a getting started 
 
 ### Environment Setup
 
-1. Fork the repository using the "Use this template" button
-2. Clone the repository
+
+1. Clone the repository
 
    ```sh
    git clone https://github.com/USERNAME/REPONAME.git
@@ -67,22 +67,14 @@ In this section, you'll find relevant project information and a getting started 
    git remote add upstream git@github.com:sudolabs-io/bootcamp-final-assignment.git
    ```
 
-3. Make a copy of [data/database.json.dist](data/database.json.dist) and rename it to `data/database.json`
-4. ```npm install```
-5. ```npm run start:server```
-6. ```npm run start:client```
-7. Head out to the Trello board, pick a task and start working on it, then rinse and repeat.
-8. ```code REPONAME``` and install the recommended extension
+2. Make a copy of [data/database.json.dist](data/database.json.dist) and rename it to `data/database.json`
+3. ```npm install```
+4. ```npm run start:server```
+5. ```npm run start:client```
+6. Head out to the Trello board, pick a task and start working on it, then rinse and repeat.
+7. ```code REPONAME``` and install the recommended extension
 
-## Deployment
 
-You can deploy this repository to Heroku by clicking the button below.
-
-> Please note this button won't work from within a private repository.
-> Thus make sure your repo is public before clicking the button. See
-> the following guide to [learn about possible workarounds](https://devcenter.heroku.com/articles/heroku-button#private-github-repos).
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Documentation
 
