@@ -5,7 +5,13 @@ import * as React from 'react'
 import { Box, Button, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import { createTask, removeTaskGroup, updateTask, updateTaskGroup } from '../../../utils/api'
+import {
+  createTask,
+  removeTaskGroup,
+  updateTask,
+  updateTaskGroup,
+  getTask,
+} from '../../../utils/api'
 import { Task } from './Task'
 import { AddNewTask } from '../Components/AddNewTask'
 import { EditTaskForm } from '../Components/EditTaskForm'
