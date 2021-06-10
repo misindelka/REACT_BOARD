@@ -26,7 +26,7 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
 
   const tasks = board.tasks?.map((i) => i)
 
-  const orderedTasks = group.taskIds?.map((taskId) => tasks[taskId])
+  const orderedTasks = group.taskIds?.map((taskId) => board.tasks[taskId])
   console.log('orderd', orderedTasks)
 
   const {

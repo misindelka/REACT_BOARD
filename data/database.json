@@ -4,17 +4,14 @@
       "name": "Sudo Academy: Capstone Project",
       "id": 1,
       "color": "blue.400",
-      "members": []
+      "members" : []
     }
   ],
   "taskGroups": [
     {
       "name": "Backlog",
       "boardId": 1,
-      "taskIds": [
-        1,
-        2
-      ],
+      "taskIds": [1],
       "id": 1
     }
   ],
@@ -24,19 +21,8 @@
       "content": "git clone and npm install",
       "boardId": 1,
       "date": "11.2.2021",
-      "id": 1,
-      "archived": false
-    },
-    {
-      "name": "2",
-      "content": "2",
-      "minutes": 0,
-      "completedMinutes": 0,
-      "assignedTo": [],
-      "archived": false,
-      "boardId": 1,
-      "date": "10.06.2021",
-      "id": 2
+      "id":1,
+      "archived":false
     }
   ]
 }
