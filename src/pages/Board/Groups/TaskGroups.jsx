@@ -26,8 +26,8 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
 
   const tasks = board.tasks?.map((i) => i)
 
-  const orderedTasks = group.taskIds.map((taskId) => tasks[taskId])
-  console.log('orderd', group.id, orderedTasks)
+  const orderedTasks = group.taskIds?.map((taskId) => tasks[taskId])
+  console.log('orderd', orderedTasks)
 
   const {
     isOpen: isOpenCreateTask,
@@ -158,31 +158,28 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 <Box maxH={['55vh', '68vh']} overflowY="scroll">
-                  {tasks?.map(
-                    (task, index) =>
-                      group.taskIds.includes(task.id) && (
-                        <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
-                          {(provided) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <Task
-                                handleArchiveTask={handleArchiveTask}
-                                taskIds={group.taskIds}
-                                taskGroupId={group.id}
-                                boardId={board.id}
-                                key={task.id}
-                                task={task}
-                                handleEditTask={handleEditTask}
-                                fetchBoard={fetchBoard}
-                              />
-                            </div>
-                          )}
-                        </Draggable>
-                      )
-                  )}
+                  {tasks?.map((task, index) => (
+                    <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <Task
+                            handleArchiveTask={handleArchiveTask}
+                            taskIds={group.taskIds}
+                            taskGroupId={group.id}
+                            boardId={board.id}
+                            key={task.id}
+                            task={task}
+                            handleEditTask={handleEditTask}
+                            fetchBoard={fetchBoard}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
                   {provided.placeholder}
                 </Box>
               </div>

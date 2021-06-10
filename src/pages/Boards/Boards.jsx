@@ -71,7 +71,7 @@ const Boards = () => {
   ) : (
     <>
       <Grid mt="3" gridTemplateColumns={{ base: '1fr 1fr', lg: '1fr 1fr 1fr 1fr' }}>
-        {boards.length < 1 ? (
+        {boards?.length < 1 ? (
           <FirstBoardForm
             boardColor={boardColor}
             newBoard={newBoard}
@@ -81,7 +81,7 @@ const Boards = () => {
           />
         ) : (
           <>
-            {boards.map((board) => (
+            {boards?.map((board) => (
               <BoardCard
                 boardColor={boardColor}
                 setBoardColor={setBoardColor}
