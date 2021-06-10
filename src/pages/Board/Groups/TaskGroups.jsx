@@ -24,7 +24,10 @@ export const TaskGroups = ({ group, board, fetchBoard, hoverColor }) => {
   const [currentGroupId, setCurrentGroupId] = React.useState()
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const tasks = board.tasks.map((i) => i)
+  const tasks = board.tasks?.map((i) => i)
+
+  const orderedTasks = group.taskIds.map((taskId) => tasks[taskId])
+  console.log('orderd', group.id, orderedTasks)
 
   const {
     isOpen: isOpenCreateTask,
